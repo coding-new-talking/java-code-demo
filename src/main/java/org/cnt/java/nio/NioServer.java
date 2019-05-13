@@ -61,14 +61,17 @@ public class NioServer {
 			counter.incrementAndGet();
 			try {
 				ByteBuffer bb = ByteBuffer.allocate(20);
+				long begin = System.currentTimeMillis();
 				sc.read(bb);
+				long end = System.currentTimeMillis();
 				byte[] bytes = new byte[20];
 				bb.flip();
 				int count = bb.remaining();
 				bb.get(bytes, 0, count);
-				System.out.println(time() + "->" + new String(bytes, 0, count) + "->" + Thread.currentThread().getId() + ":" + counter.get());
 				key.interestOps(key.interestOps() | SelectionKey.OP_READ);
 				sc.close();
+				System.out.println(time() + "->" + new String(bytes, 0, count) + "->" + Thread.currentThread().getId() + ":" + counter.get());
+				System.out.println(Thread.currentThread().getId() + "->" + (end -begin) + " ms" );
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

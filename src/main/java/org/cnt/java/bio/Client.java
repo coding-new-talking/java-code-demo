@@ -13,7 +13,7 @@ public class Client {
 
 	public static void main(String[] args) {
 		try {
-			for (int i = 0; i < 200; i++) {
+			for (int i = 0; i < 20; i++) {
 				Socket s = new Socket();
 				s.connect(new InetSocketAddress("localhost", 8080));
 				processWithNewThread(s, i);

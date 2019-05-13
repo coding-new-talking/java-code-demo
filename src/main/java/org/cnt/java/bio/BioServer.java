@@ -36,9 +36,12 @@ public class BioServer {
 			System.out.println(rsa.getHostName() + ":" + rsa.getPort() + "->" + Thread.currentThread().getId() + ":" + counter.incrementAndGet());
 			try {
 				byte[] bytes = new byte[20];
+				long begin = System.currentTimeMillis();
 				int count = s.getInputStream().read(bytes);
+				long end = System.currentTimeMillis();
 				s.close();
 				System.out.println(time() + "->" + new String(bytes, 0, count) + "->" + Thread.currentThread().getId() + ":" + counter.getAndDecrement());
+				System.out.println(Thread.currentThread().getId() + "->" + (end -begin) + " ms" );
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
