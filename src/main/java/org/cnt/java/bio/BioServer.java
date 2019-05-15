@@ -1,6 +1,6 @@
 package org.cnt.java.bio;
 
-import java.io.IOException;
+import java.io.InputStream;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -25,7 +25,7 @@ public class BioServer {
 				Socket s = ss.accept();
 				processWithNewThread(s);
 			}
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -33,20 +33,35 @@ public class BioServer {
 	static void processWithNewThread(Socket s) {
 		Runnable run = () -> {
 			InetSocketAddress rsa = (InetSocketAddress)s.getRemoteSocketAddress();
-			System.out.println(rsa.getHostName() + ":" + rsa.getPort() + "->" + Thread.currentThread().getId() + ":" + counter.incrementAndGet());
+			System.out.println(time() + "->" + rsa.getHostName() + ":" + rsa.getPort() + "->" + Thread.currentThread().getId() + ":" + counter.incrementAndGet());
 			try {
-				byte[] bytes = new byte[20];
-				long begin = System.currentTimeMillis();
-				int count = s.getInputStream().read(bytes);
-				long end = System.currentTimeMillis();
+				String result = readBytes(s.getInputStream());
+				System.out.println(time() + "->" + result + "->" + Thread.currentThread().getId() + ":" + counter.getAndDecrement());
 				s.close();
-				System.out.println(time() + "->" + new String(bytes, 0, count) + "->" + Thread.currentThread().getId() + ":" + counter.getAndDecrement());
-				System.out.println(Thread.currentThread().getId() + "->" + (end -begin) + " ms" );
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		};
 		new Thread(run).start();
+	}
+	
+	static String readBytes(InputStream is) throws Exception {
+		long start = 0;
+		int total = 0;
+		int count = 0;
+		byte[] bytes = new byte[1024];
+		//开始读数据的时间
+		long begin = System.currentTimeMillis();
+		while ((count = is.read(bytes)) > -1) {
+			if (start < 1) {
+				//第一次读到数据的时间
+				start = System.currentTimeMillis();
+			}
+			total += count;
+		}
+		//读完数据的时间
+		long end = System.currentTimeMillis();
+		return "wait=" + (start - begin) + "ms,read=" + (end - start) + "ms,total=" + total + "bs";
 	}
 
 	static String time() {
