@@ -1,4 +1,4 @@
-package org.cnt.java.bio;
+package org.cnt.java.io.bio;
 
 import java.io.InputStream;
 import java.net.InetSocketAddress;

@@ -1,4 +1,4 @@
-package org.cnt.java.aio;
+package org.cnt.java.io.aio;
 
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
