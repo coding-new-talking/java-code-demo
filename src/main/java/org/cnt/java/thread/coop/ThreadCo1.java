@@ -1,10 +1,10 @@
 package org.cnt.java.thread.coop;
 
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Random;
+import static org.cnt.java.utils.Methods.doingLongTime;
+import static org.cnt.java.utils.Methods.println;
+import static org.cnt.java.utils.Methods.sleep;
+
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author lixinjie
@@ -12,12 +12,14 @@ import java.util.concurrent.TimeUnit;
  */
 public class ThreadCo1 {
 
-	static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
+	
+	
+	static final int COUNT = 20;
 	
 	public static void main(String[] args) throws Exception {
 		new Thread(new Teacher(cdl)).start();
 		sleep(1);
-		for (int i = 0; i < 20; i++) {
+		for (int i = 0; i < COUNT; i++) {
 			new Thread(new Student(i, cdl)).start();
 		}
 		synchronized (ThreadCo1.class) {
@@ -25,7 +27,7 @@ public class ThreadCo1 {
 		}
 	}
 	
-	static CountDownLatch cdl = new CountDownLatch(20);
+	static CountDownLatch cdl = new CountDownLatch(COUNT);
 	
 	static class Teacher implements Runnable {
 		
@@ -61,31 +63,11 @@ public class ThreadCo1 {
 		@Override
 		public void run() {
 			println("学生(%d)写卷子。。。", num);
-			workingHard();
+			doingLongTime();
 			println("学生(%d)交卷子。。。", num);
 			cdl.countDown();
 		}
 		
 	}
 
-	static void workingHard() {
-		int second = 5 + new Random().nextInt(6);
-		sleep(second);
-	}
-	
-	static void sleep(int second) {
-		try {
-			TimeUnit.SECONDS.sleep(second);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	static void println(String text, Object... args) {
-		System.out.println(String.format(time() + ", " + text, args));
-	}
-	
-	static String time() {
-		return LocalTime.now().format(dtf);
-	}
 }

@@ -1,8 +1,11 @@
 package org.cnt.java.thread.basic;
 
-import java.time.LocalTime;
+import static org.cnt.java.utils.Methods.doingLongTime;
+import static org.cnt.java.utils.Methods.println;
+import static org.cnt.java.utils.Methods.sleep;
+import static org.cnt.java.utils.Methods.sleep2;
+
 import java.time.format.DateTimeFormatter;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author lixinjie
@@ -61,7 +64,7 @@ public class ThreadOp {
 		@Override
 		public void run() {
 			println("进入不可暂停区域 1。。。");
-			workingHard(5);
+			doingLongTime(5);
 			println("退出不可暂停区域 1。。。");
 		}
 		
@@ -87,7 +90,7 @@ public class ThreadOp {
 		@Override
 		public void run() {
 			println("进入不可暂停区域 1。。。");
-			workingHard(5);
+			doingLongTime(5);
 			println("退出不可暂停区域 1。。。");
 			println("检测标志pause = %s", String.valueOf(pause));
 			if (pause) {
@@ -102,7 +105,7 @@ public class ThreadOp {
 				println("恢复执行");
 			}
 			println("进入不可暂停区域 2。。。");
-			workingHard(5);
+			doingLongTime(5);
 			println("退出不可暂停区域 2。。。");
 		}
 		
@@ -133,7 +136,7 @@ public class ThreadOp {
 		@Override
 		public void run() {
 			println("进入不可暂停区域 1。。。");
-			workingHard(5);
+			doingLongTime(5);
 			println("退出不可暂停区域 1。。。");
 			println("检测标志pause = %s", String.valueOf(pause));
 			if (pause) {
@@ -148,7 +151,7 @@ public class ThreadOp {
 				println("恢复执行");
 			}
 			println("进入不可暂停区域 2。。。");
-			workingHard(5);
+			doingLongTime(5);
 			println("退出不可暂停区域 2。。。");
 		}
 		
@@ -171,7 +174,7 @@ public class ThreadOp {
 		@Override
 		public void run() {
 			println("进入不可停止区域 1。。。");
-			workingHard(5);
+			doingLongTime(5);
 			println("退出不可停止区域 1。。。");
 			println("检测标志stop = %s", String.valueOf(stop));
 			if (stop) {
@@ -179,33 +182,10 @@ public class ThreadOp {
 				return;
 			}
 			println("进入不可停止区域 2。。。");
-			workingHard(5);
+			doingLongTime(5);
 			println("退出不可停止区域 2。。。");
 		}
 		
 	}
 	
-	static void println(String text, Object... args) {
-		System.out.println(String.format(time() + ", " + text, args));
-	}
-	
-	static String time() {
-		return LocalTime.now().format(dtf);
-	}
-	
-	static void workingHard(int second) {
-		sleep(second);
-	}
-	
-	static void sleep(int second) {
-		try {
-			TimeUnit.SECONDS.sleep(second);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	static void sleep2(int second) throws InterruptedException {
-		TimeUnit.SECONDS.sleep(second);
-	}
 }

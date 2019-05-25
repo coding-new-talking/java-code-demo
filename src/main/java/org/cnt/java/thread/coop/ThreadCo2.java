@@ -1,10 +1,9 @@
 package org.cnt.java.thread.coop;
 
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Random;
+import static org.cnt.java.utils.Methods.doingLongTime;
+import static org.cnt.java.utils.Methods.println;
+
 import java.util.concurrent.CyclicBarrier;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author lixinjie
@@ -12,11 +11,10 @@ import java.util.concurrent.TimeUnit;
  */
 public class ThreadCo2 {
 
-	static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
+	static final int COUNT = 5;
 	
 	public static void main(String[] args) throws Exception {
-		new Thread(new Leader(cb)).start();
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < COUNT; i++) {
 			new Thread(new Staff(i, cb)).start();
 		}
 		synchronized (ThreadCo2.class) {
@@ -24,45 +22,13 @@ public class ThreadCo2 {
 		}
 	}
 	
-	static CyclicBarrier cb = new CyclicBarrier(11);
+	static CyclicBarrier cb = new CyclicBarrier(COUNT, new Singer());
 	
-	static class Leader implements Runnable {
-		
-		CyclicBarrier cb;
-		
-		Leader(CyclicBarrier cb) {
-			this.cb = cb;
-		}
+	static class Singer implements Runnable {
 		
 		@Override
 		public void run() {
-			println("队长出发。。。");
-			workingHard();
-			println("队长到达地点一。。。");
-			try {
-				cb.await();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			cb.reset();
-			println("队长再出发。。。");
-			workingHard();
-			println("队长到达地点二。。。");
-			try {
-				cb.await();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			cb.reset();
-			println("队长再出发。。。");
-			workingHard();
-			println("队长到达地点三。。。");
-			try {
-				cb.await();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			println("队长结束。。。");
+			println("为大家唱歌。。。");
 		}
 		
 	}
@@ -80,7 +46,7 @@ public class ThreadCo2 {
 		@Override
 		public void run() {
 			println("员工(%d)出发。。。", num);
-			workingHard();
+			doingLongTime();
 			println("员工(%d)到达地点一。。。", num);
 			try {
 				cb.await();
@@ -88,7 +54,7 @@ public class ThreadCo2 {
 				e.printStackTrace();
 			}
 			println("员工(%d)再出发。。。", num);
-			workingHard();
+			doingLongTime();
 			println("员工(%d)到达地点二。。。", num);
 			try {
 				cb.await();
@@ -96,7 +62,7 @@ public class ThreadCo2 {
 				e.printStackTrace();
 			}
 			println("员工(%d)再出发。。。", num);
-			workingHard();
+			doingLongTime();
 			println("员工(%d)到达地点三。。。", num);
 			try {
 				cb.await();
@@ -108,24 +74,4 @@ public class ThreadCo2 {
 		
 	}
 
-	static void workingHard() {
-		int second = 5 + new Random().nextInt(6);
-		sleep(second);
-	}
-	
-	static void sleep(int second) {
-		try {
-			TimeUnit.SECONDS.sleep(second);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	static void println(String text, Object... args) {
-		System.out.println(String.format(time() + ", " + text, args));
-	}
-	
-	static String time() {
-		return LocalTime.now().format(dtf);
-	}
 }
