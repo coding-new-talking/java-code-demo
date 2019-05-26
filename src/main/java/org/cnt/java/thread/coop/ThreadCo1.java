@@ -12,8 +12,6 @@ import java.util.concurrent.CountDownLatch;
  */
 public class ThreadCo1 {
 
-	
-	
 	static final int COUNT = 20;
 	
 	public static void main(String[] args) throws Exception {

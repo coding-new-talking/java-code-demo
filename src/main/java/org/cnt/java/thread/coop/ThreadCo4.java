@@ -2,6 +2,7 @@ package org.cnt.java.thread.coop;
 
 import static org.cnt.java.utils.Methods.doingLongTime;
 import static org.cnt.java.utils.Methods.println;
+import static org.cnt.java.utils.Methods.println2;
 import static org.cnt.java.utils.Methods.random;
 
 import java.util.concurrent.Phaser;
@@ -29,7 +30,7 @@ public class ThreadCo4 {
 	static Phaser ph = new Phaser() {
 		
 		protected boolean onAdvance(int phase, int registeredParties) {
-			System.out.println(phase + "," + registeredParties);
+			println2("第(%d)局，剩余[%d]人", phase, registeredParties);
 			return registeredParties == 0 ||
 					(phase != 0 && registeredParties == COUNT);
 		};
@@ -90,11 +91,11 @@ public class ThreadCo4 {
 	static class Decide {
 
 		static boolean goon() {
-			return random(10) > 5;
+			return random(9) > 4;
 		}
 		
 		static boolean revive() {
-			return random(10) < 5;
+			return random(9) < 5;
 		}
 	}
 

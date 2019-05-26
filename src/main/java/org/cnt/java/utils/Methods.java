@@ -42,6 +42,10 @@ public class Methods {
 		TimeUnit.SECONDS.sleep(second);
 	}
 	
+	public static void println2(String text, Object... args) {
+		System.out.println(String.format(text, args));
+	}
+	
 	public static void println(String text, Object... args) {
 		System.out.println(String.format(time() + ", " + text, args));
 	}
