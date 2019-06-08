@@ -42,6 +42,10 @@ public class Methods {
 		TimeUnit.SECONDS.sleep(second);
 	}
 	
+	public static void println3(Object obj) {
+		System.out.println(time() + ", " + obj);
+	}
+	
 	public static void println2(String text, Object... args) {
 		System.out.println(String.format(text, args));
 	}
@@ -50,6 +54,10 @@ public class Methods {
 		System.out.println(String.format(time() + ", " + text, args));
 	}
 	
+	public static void println(Object obj) {
+		System.out.println(obj);
+	}
+			
 	public static String time() {
 		return LocalTime.now().format(dtf);
 	}
