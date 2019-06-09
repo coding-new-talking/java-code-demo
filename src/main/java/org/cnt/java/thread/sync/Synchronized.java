@@ -35,6 +35,8 @@ public class Synchronized {
 		//monitorenter/monitorexit
 		//进入监视器/退出监视器
 		//每次只有一个线程可以拥有一个对象的监视器
+		//当线程即将进入等待时，会释放掉该对象的监视器
+		//以便让其他线程获取这个对象的监视器，在适合的时候来通知自己
 	}
 	
 	static void test1() {
