@@ -9,14 +9,15 @@ import static org.cnt.java.utils.Methods.*;
 public class Obj {
 
 	public static void main(String[] args) {
-		//test1();
+		test1();
 		//test2();
 		//test3();
-		test4();
+		//test4();
 	}
 	
 	static void test1() {
 		O o = new O("小白");
+		new Thread(new W(o):: run).start();
 		new Thread(new W(o):: run).start();
 		new Thread(new N(o):: run).start();
 	}
@@ -105,6 +106,11 @@ public class Obj {
 		}
 		
 		void run() {
+			sleep(6);
+			synchronized(o) {
+				println("当前线程（%d）通知在对象（%s）上等待的其他单个线程", Thread.currentThread().getId(), o.name);
+				o.notify();
+			}
 			sleep(6);
 			synchronized(o) {
 				println("当前线程（%d）通知在对象（%s）上等待的其他单个线程", Thread.currentThread().getId(), o.name);
