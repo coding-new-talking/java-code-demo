@@ -1,11 +1,8 @@
 package org.cnt.java.classfile;
 
 import java.io.IOException;
-import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.List;
-import java.util.stream.IntStream;
 
 import org.cnt.java.utils.Byter;
 
@@ -17,53 +14,56 @@ public class _ClassFile {
 
 	public static void main(String[] args) throws IOException {
 		String path = "G:\\workspace\\sts4-cnt\\java-code-demo\\target\\classes\\org\\cnt\\java\\classfile\\Broccoli.class";
-		String charset = "ASCII";
-		showClassFile(path);
-	}
-
-	static void showClassFile(String path, String charset) throws IOException {
-		List<String> lines = Files.readAllLines(Paths.get(path), Charset.forName(charset));
-		System.out.println(lines.size());
-		lines.forEach(line -> System.out.println(line));
+		byte[] bytes = Files.readAllBytes(Paths.get(path));
+		showMagic(bytes);
+		showVersion(bytes);
+		showConstantPool(bytes);
 	}
 	
-	static void showClassFile(String path) throws IOException {
-		byte[] bytes = Files.readAllBytes(Paths.get(path));
-		System.out.println(bytes.length);
-		byte ca = bytes[0];
-		byte fe = bytes[1];
-		byte ba = bytes[2];
-		byte by = bytes[3];
+	static void showMagic(byte[] bytes) {
+		//magic,u4,0-3
+		byte b0 = bytes[0];
+		byte b1 = bytes[1];
+		byte b2 = bytes[2];
+		byte b3 = bytes[3];
+		log(Long.toHexString(Byter.toUnsigned(b0, b1, b2, b3)));
+		//cafebabe
+	}
+	
+	static void showVersion(byte[] bytes) {
+		//minor_version,u2,4-5
+		byte b4 = bytes[4];
+		byte b5 = bytes[5];
+		log(Byter.toUnsigned(b4, b5));
+		//0
 		
-		System.out.println(Long.toHexString(Byter.toUnsigned(ca, fe, ba, by)));
-		
-		int ica = Byte.toUnsignedInt(ca);
-		int ife = Byte.toUnsignedInt(fe);
-		int iba = Byte.toUnsignedInt(ba);
-		int iby = Byte.toUnsignedInt(by);
-		
-		System.out.println(ca);
-		System.out.println(ica);
-		System.out.println(Integer.toHexString(ica >> 4));
-		System.out.println(Integer.toHexString(ica & 0b00001111));
-		System.out.println(fe);
-		System.out.println(ife);
-		System.out.println(Integer.toHexString(ife >> 4));
-		System.out.println(Integer.toHexString(ife & 0b00001111));
-		System.out.println(ba);
-		System.out.println(iba);
-		System.out.println(Integer.toHexString(iba >> 4));
-		System.out.println(Integer.toHexString(iba & 0b00001111));
-		System.out.println(by);
-		System.out.println(iby);
-		System.out.println(Integer.toHexString(iby >> 4));
-		System.out.println(Integer.toHexString(iby & 0b00001111));
-		System.out.println();
-		for (int i = 0; i < bytes.length; i++) {
-			System.out.print(bytes[i]);
-			System.out.print(",");
-			//System.out.print((char)bytes[i]);
-			
-		}
+		//major_version,u2,6-7
+		byte b6 = bytes[6];
+		byte b7 = bytes[7];
+		log(Byter.toUnsigned(b6, b7));
+		//52
+	}
+	
+	static void showConstantPool(byte[] bytes) {
+		//constant_pool_count,u2,8-9
+		byte b8 = bytes[8];
+		byte b9 = bytes[9];
+		int count = Byter.toUnsigned(b8, b9);
+		log(count);
+		//43
+		log(Byter.toUnsigned(bytes[10]));
+		log(Byter.toUnsigned(bytes[11], bytes[12]));
+		log(Byter.toUnsigned(bytes[13]));
+		log(Byter.toUnsigned(bytes[14], bytes[15]));
+		log(new String(bytes, 16, 31));
+		log(Byter.toUnsigned(bytes[47]));
+		log(Byter.toUnsigned(bytes[48], bytes[49]));
+		log(Byter.toUnsigned(bytes[50]));
+		log(Byter.toUnsigned(bytes[51], bytes[52]));
+		log(new String(bytes, 53, 32));
+	}
+	
+	static void log(Object o) {
+		System.out.println(o);
 	}
 }

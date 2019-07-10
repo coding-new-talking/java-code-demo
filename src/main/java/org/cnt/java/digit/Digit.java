@@ -9,7 +9,10 @@ public class Digit {
 	public static void main(String[] args) {
 		//binaryRepresent();
 		//binaryOperate();
-		binarayShift();
+		//binaryShift();
+		//binaryStretch();
+		//digitSerDes();
+		unsignedDigit();
 	}
 
 	//最高位是符号位，0表示正数，1表示负数。
@@ -18,35 +21,35 @@ public class Digit {
 	//把原码中的0变为1、1变为0，此时称为反码。
 	//反码加1就是补码。
 	static void binaryRepresent() {
-		log(Integer.toBinaryString(0));
+		log(binary(0));
 		//00000000
 		
-		log(Integer.toBinaryString(1));
+		log(binary(1));
 		//00000001
-		log(Integer.toBinaryString(-1));
+		log(binary(-1));
 		//11111111
 		
-		log(Integer.toBinaryString(2));
+		log(binary(2));
 		//00000010
-		log(Integer.toBinaryString(-2));
+		log(binary(-2));
 		//11111110
 		
-		log(Integer.toBinaryString(5));
+		log(binary(5));
 		//00000101
-		log(Integer.toBinaryString(-5));
+		log(binary(-5));
 		//11111011
 		
-		log(Integer.toBinaryString(Byte.MAX_VALUE));
+		log(binary(Byte.MAX_VALUE));
 		//01111111
-		log(Integer.toBinaryString(-Byte.MAX_VALUE));
+		log(binary(-Byte.MAX_VALUE));
 		//10000001
 
-		log(Integer.toBinaryString(Byte.MIN_VALUE));
+		log(binary(Byte.MIN_VALUE));
 		//10000000
 		
 		//从9转换-9(取反再加1)
-		log(Integer.toBinaryString(~9 + 1));
-		log(Integer.toBinaryString(-9));
+		log(binary(~9 + 1));
+		log(binary(-9));
 	}
 	
 	//二进制的与/或/非/异或
@@ -55,13 +58,13 @@ public class Digit {
 	//非(not)，~，也称取反，0变成1、1变成0
 	//异或(xor)，^，0 ^ 1 -> 1，1 ^ 0 -> 1，其余都是0
 	static void binaryOperate() {
-		log(Integer.toBinaryString(0b00001010 & 0b00001111));
+		log(binary(0b00001010 & 0b00001111));
 		//00001010
-		log(Integer.toBinaryString(0b00001010 | 0b00001111));
+		log(binary(0b00001010 | 0b00001111));
 		//00001111
-		log(Integer.toBinaryString(~0b00001010));
+		log(binary(~0b00001010));
 		//11110101
-		log(Integer.toBinaryString(0b00001010 ^ 0b00001111));
+		log(binary(0b00001010 ^ 0b00001111));
 		//00000101
 	}
 	
@@ -69,13 +72,21 @@ public class Digit {
 	//左移(<<)时，左边丢弃(符号位照样丢弃)，右边补0，左移一位相当于乘2，二位相当于乘4，以此类推。
 	//移完后，最高位是0为正数，是1为负数。正数和负数左移时都遵从这个规律。
 	//当左移一个周期时，回到原点。即相当于不移。超过一个周期后，把周期部分除掉，移动剩下的。
+	
 	//右移(>>)时，右边丢弃，正数左边补0，负数左边补1，右移一位相当于除2，二位相当于除4，以此类推。
 	//在四舍五入时，正数选择舍，负数选择入。
 	//正数右移从都丢弃完开始往后都是0，因为二进制都是0，直到到达一个周期时，回到原点。相当于不移。
 	//超过一个周期后，把周期部分除掉，移动剩下的。
 	//负数右移从都丢弃完开始往后都是-1，因为二进制都是1，直到到达一个周期时，回到原点。相当于不移。
 	//超过一个周期后，把周期部分除掉，移动剩下的。
-	static void binarayShift() {
+	
+	//无符号右移(>>>)时，右边丢弃，正数和负数左边都补0。
+	//因此对于正数来说和右移(>>)没有什么差别。
+	//对于负数来说会变成正数，就是使用原来的补码形式，丢去右边后当作正数来计算。
+	
+	//为什么没有无符号左移？
+	//因为左移时，在右边补0，而符号位在最左边，右边补的东西是影响不到它的。
+	static void binaryShift() {
 		log(5);
 		//5
 		log(5 << 1);
@@ -84,13 +95,13 @@ public class Digit {
 		//20
 		log(5 << 3);
 		//40
-		log(Integer.toBinaryString(5));
+		log(binary(5));
 		//101
-		log(Integer.toBinaryString(5 << 1));
+		log(binary(5 << 1));
 		//1010
-		log(Integer.toBinaryString(5 << 2));
+		log(binary(5 << 2));
 		//10100
-		log(Integer.toBinaryString(5 << 3));
+		log(binary(5 << 3));
 		//101000
 		
 		log(-5);
@@ -101,13 +112,13 @@ public class Digit {
 		//-20
 		log(-5 << 3);
 		//-40
-		log(Integer.toBinaryString(-5));
+		log(binary(-5));
 		//011
-		log(Integer.toBinaryString(-5 << 1));
+		log(binary(-5 << 1));
 		//0110
-		log(Integer.toBinaryString(-5 << 2));
+		log(binary(-5 << 2));
 		//01100
-		log(Integer.toBinaryString(-5 << 3));
+		log(binary(-5 << 3));
 		//01100
 		
 		log("");
@@ -124,13 +135,13 @@ public class Digit {
 		//5
 		log(5 << 33);
 		//10
-		log(Integer.toBinaryString(5));
+		log(binary(5));
 		//101
-		log(Integer.toBinaryString(5 << 29));
+		log(binary(5 << 29));
 		//10100000000000000000000000000000
-		log(Integer.toBinaryString(5 << 30));
+		log(binary(5 << 30));
 		//01000000000000000000000000000000
-		log(Integer.toBinaryString(5 << 31));
+		log(binary(5 << 31));
 		//10000000000000000000000000000000
 		
 		log(-5);
@@ -145,13 +156,13 @@ public class Digit {
 		//-5
 		log(-5 << 33);
 		//-10
-		log(Integer.toBinaryString(-5));
+		log(binary(-5));
 		//011
-		log(Integer.toBinaryString(-5 << 29));
+		log(binary(-5 << 29));
 		//01100000000000000000000000000000
-		log(Integer.toBinaryString(-5 << 30));
+		log(binary(-5 << 30));
 		//11000000000000000000000000000000
-		log(Integer.toBinaryString(-5 << 31));
+		log(binary(-5 << 31));
 		//10000000000000000000000000000000
 		
 		log("------------------------------");
@@ -164,13 +175,13 @@ public class Digit {
 		//24
 		log(99 >> 3);
 		//12
-		log(Integer.toBinaryString(99));
+		log(binary(99));
 		//1100011
-		log(Integer.toBinaryString(99 >> 1));
+		log(binary(99 >> 1));
 		//110001
-		log(Integer.toBinaryString(99 >> 2));
+		log(binary(99 >> 2));
 		//11000
-		log(Integer.toBinaryString(99 >> 3));
+		log(binary(99 >> 3));
 		//1100
 		
 		log(-99);
@@ -181,13 +192,13 @@ public class Digit {
 		//-25
 		log(-99 >> 3);
 		//-13
-		log(Integer.toBinaryString(-99));
+		log(binary(-99));
 		//0011101
-		log(Integer.toBinaryString(-99 >> 1));
+		log(binary(-99 >> 1));
 		//1001110
-		log(Integer.toBinaryString(-99 >> 2));
+		log(binary(-99 >> 2));
 		//1100111
-		log(Integer.toBinaryString(-99 >> 3));
+		log(binary(-99 >> 3));
 		//1110011
 		
 		log("");
@@ -208,21 +219,21 @@ public class Digit {
 		//99
 		log(99 >> 33);
 		//49
-		log(Integer.toBinaryString(99));
+		log(binary(99));
 		//1100011
-		log(Integer.toBinaryString(99 >> 6));
+		log(binary(99 >> 6));
 		//1
-		log(Integer.toBinaryString(99 >> 7));
+		log(binary(99 >> 7));
 		//0
-		log(Integer.toBinaryString(99 >> 8));
+		log(binary(99 >> 8));
 		//0
-		log(Integer.toBinaryString(99 >> 9));
+		log(binary(99 >> 9));
 		//0
-		log(Integer.toBinaryString(99 >> 31));
+		log(binary(99 >> 31));
 		//0
-		log(Integer.toBinaryString(99 >> 32));
+		log(binary(99 >> 32));
 		//1100011
-		log(Integer.toBinaryString(99 >> 33));
+		log(binary(99 >> 33));
 		//110001
 		
 		log(-99);
@@ -241,61 +252,383 @@ public class Digit {
 		//-99
 		log(-99 >> 33);
 		//-50
-		log(Integer.toBinaryString(-99));
+		log(binary(-99));
 		//0011101
-		log(Integer.toBinaryString(-99 >> 6));
+		log(binary(-99 >> 6));
 		//1111110
-		log(Integer.toBinaryString(-99 >> 7));
+		log(binary(-99 >> 7));
 		//1111111
-		log(Integer.toBinaryString(-99 >> 8));
+		log(binary(-99 >> 8));
 		//1111111
-		log(Integer.toBinaryString(-99 >> 9));
+		log(binary(-99 >> 9));
 		//1111111
-		log(Integer.toBinaryString(-99 >> 31));
+		log(binary(-99 >> 31));
 		//1111111
-		log(Integer.toBinaryString(-99 >> 32));
+		log(binary(-99 >> 32));
 		//0011101
-		log(Integer.toBinaryString(-99 >> 33));
+		log(binary(-99 >> 33));
 		//1001110
 
 		log("------------------------------");
 		
 		log(99);
+		//99
 		log(99 >>> 1);
+		//49
 		log(99 >>> 2);
+		//24
 		log(99 >>> 7);
+		//0
 		log(99 >>> 8);
+		//0
+		log(99 >>> 30);
+		//0
 		log(99 >>> 31);
+		//0
 		log(99 >>> 32);
+		//99
 		log(99 >>> 33);
-		log(Integer.toBinaryString(99));
-		log(Integer.toBinaryString(99 >>> 1));
-		log(Integer.toBinaryString(99 >>> 2));
-		log(Integer.toBinaryString(99 >>> 7));
-		log(Integer.toBinaryString(99 >>> 8));
-		log(Integer.toBinaryString(99 >>> 31));
-		log(Integer.toBinaryString(99 >>> 32));
-		log(Integer.toBinaryString(99 >>> 33));
+		//49
+		log(binary(99));
+		//1100011
+		log(binary(99 >>> 1));
+		//110001
+		log(binary(99 >>> 2));
+		//11000
+		log(binary(99 >>> 7));
+		//0
+		log(binary(99 >>> 8));
+		//0
+		log(binary(99 >>> 30));
+		//0
+		log(binary(99 >>> 31));
+		//0
+		log(binary(99 >>> 32));
+		//1100011
+		log(binary(99 >>> 33));
+		//110001
 		
 		log(-99);
+		//-99
 		log(-99 >>> 1);
+		//2147483598
 		log(-99 >>> 2);
+		//1073741799
 		log(-99 >>> 7);
+		//33554431
 		log(-99 >>> 8);
+		//16777215
+		log(-99 >>> 30);
+		//3
 		log(-99 >>> 31);
+		//1
 		log(-99 >>> 32);
+		//-99
 		log(-99 >>> 33);
-		log(Integer.toBinaryString(-99));
-		log(Integer.toBinaryString(-99 >>> 1));
-		log(Integer.toBinaryString(-99 >>> 2));
-		log(Integer.toBinaryString(-99 >>> 7));
-		log(Integer.toBinaryString(-99 >>> 8));
-		log(Integer.toBinaryString(-99 >>> 31));
-		log(Integer.toBinaryString(-99 >>> 32));
-		log(Integer.toBinaryString(-99 >>> 33));
+		//2147483598
+		log(binary(-99));
+		//11111111111111111111111110011101
+		log(binary(-99 >>> 1));
+		//01111111111111111111111111001110
+		log(binary(-99 >>> 2));
+		//00111111111111111111111111100111
+		log(binary(-99 >>> 7));
+		//00000001111111111111111111111111
+		log(binary(-99 >>> 8));
+		//00000000111111111111111111111111
+		log(binary(-99 >>> 30));
+		//00000000000000000000000000000011
+		log(binary(-99 >>> 31));
+		//00000000000000000000000000000001
+		log(binary(-99 >>> 32));
+		//11111111111111111111111110011101
+		log(binary(-99 >>> 33));
+		//01111111111111111111111111001110
+	}
+	
+	//二进制的伸/缩
+	
+	//伸，把一个字节伸长为两个字节，需要填充高位字节。
+	//此时符号和数值大小保持不变。
+	//正数符号位是0，伸长时高字节填充0。
+	//负数符号位是1，伸长时高字节填充1。
+	
+	//缩，把两个字节压缩为一个字节，需要截断高位字节。
+	//此时符号和数值大小都可能发生改变。
+	//如果压缩后的字节仍能放得下这个数，则符号和数值大小保持不变。
+	//正数和负数都遵从这个规律。
+	//就是如果正数的高位字节全是0，负数的高位字节全是1，截断高位字节不会对数造成影响。
+	//如果压缩后的字节放不下这个数，则数值大小一定改变。
+	//符号是否改变取决于低位字节的最高位与原高位字节的最高位是否一样。
+	//如果一样则符号不变，反之则符号改变。
+	//就是如果正数的高位字节不全是0，负数的高位字节不全是1，截断高位字节会对数造成影响。
+	//且数值大小一定改变，符号则由新符号位和原符号位来决定。
+	static void binaryStretch() {
+		byte b = 5;
+		short s = b;
+		log(b);
+		//5
+		log(s);
+		//5
+		log(binary(b));
+		//00000101
+		log(binary(s));
+		//0000000000000101
+		
+		b = -5;
+		s = b;
+		log(b);
+		//-5
+		log(s);
+		//-5
+		log(binary(b));
+		//11111011
+		log(binary(s));
+		//1111111111111011
+		
+		log("");
+		
+		s = 127;
+		b = (byte)s;
+		log(s);
+		//127
+		log(b);
+		//127
+		log(binary(s));
+		//0000000001111111
+		log(binary(b));
+		//01111111
+		
+		s = -127;
+		b = (byte)s;
+		log(s);
+		//-127
+		log(b);
+		//-127
+		log(binary(s));
+		//1111111110000001
+		log(binary(b));
+		//10000001
+		
+		log("");
+		
+		s = 261;
+		b = (byte)s;
+		log(s);
+		//261
+		log(b);
+		//5
+		log(binary(s));
+		//0000000100000101
+		log(binary(b));
+		//00000101
+		
+		s = -261;
+		b = (byte)s;
+		log(s);
+		//-261
+		log(b);
+		//-5
+		log(binary(s));
+		//1111111011111011
+		log(binary(b));
+		//11111011
+		
+		log("");
+		
+		s = 389;
+		b = (byte)s;
+		log(s);
+		//389
+		log(b);
+		//-123
+		log(binary(s));
+		//0000000110000101
+		log(binary(b));
+		//10000101
+		
+		s = -389;
+		b = (byte)s;
+		log(s);
+		//-389
+		log(b);
+		//123
+		log(binary(s));
+		//1111111001111011
+		log(binary(b));
+		//01111011
+	}
+	
+	//数字的序列化/反序列化
+	//序列化，把数字变成字节数组，如把一个整型拆分成四个字节
+	//将需要获取的字节无符号右移至最低位
+	//与0xff执行与操作将剩余所有高位字节清空
+	//强制转换成byte类型，会只保留最低位字节，高位字节被丢弃
+	//反序列化，把字节数组变成数字，如把四个字节合成一个整型
+	//把最高位字节左移至最高位，它是带有符号位的
+	//把剩余的字节与0xff执行与操作，作用有两个
+	//一是把单个字节伸长
+	//二是清空因伸长而产生的高位字节
+	//然后再把这些字节左移到适合的位置
+	//最后再把这些字节加起来
+	//重要说明：
+	//在序列化时，可以不用无符号右移，而用右移
+	//对于正数没有区别，左边都是补0
+	//对于负数，一个左边补0，一个左边补1，
+	//左边补什么其实无所谓，因为向byte强制转换时都被丢弃
+	//也可以不与0xff执行与操作来清空高位字节
+	//清不清空其实无所谓，因为向byte强制转换时都被丢弃
+	//所以序列化的关键就是把需要摘取的字节移至最低位
+	//通过强制转换为byte类型，丢弃高位而只保留最低位
+	//在反序列化时，首先要做的就是把一个 byte伸长
+	//如果byte的最高位是0，伸长时高位字节填充的都是0
+	//如果byte的最高位是1，伸长时高位字节填充的都是1
+	//对于第一个字节，其实它是带符号的，所以不用处理
+	//对于后续的字节，它的符号位是要作为数值来对待的
+	//所以如果符号位是0的话，高位字节填充的是0，不用处理
+	//如果符号位是1的话，高位字节填充的是1，此时需要与0xff
+	//执行与操作，把高位字节填充的这些1全部清空为0
+	//不至于影响到后续的左移操作
+	//所以反序列化的关键就是把单个字节放到最低位
+	//然后左移到适合的位置
+	//最后再把这些字节加起来构成一个数字
+	static void digitSerDes() {
+		byte[] bs = new byte[4];
+		int i = 2043453625;
+		log(i);
+		//2043453625
+		log(binary(i));
+		//01111001110011001010000010111001
+		bs[0] = (byte)((i >>> 24) & 0xff);
+		log(binary(bs[0]));
+		//01111001
+		bs[1] = (byte)((i >>> 16) & 0xff);
+		log(binary(bs[1]));
+		//11001100
+		bs[2] = (byte)((i >>> 8) & 0xff);
+		log(binary(bs[2]));
+		//10100000
+		bs[3] = (byte)((i >>> 0) & 0xff);
+		log(binary(bs[3]));
+		//10111001
+		log("");
+		log(binary(bs[0] << 24));
+		//01111001000000000000000000000000
+		log(binary((bs[1] & 0xff) << 16));
+		//00000000110011000000000000000000
+		log(binary((bs[2] & 0xff) << 8));
+		//00000000000000001010000000000000
+		log(binary((bs[3] & 0xff) << 0));
+		//00000000000000000000000010111001
+		log((bs[0] << 24) + ((bs[1] & 0xff) << 16) + ((bs[2] & 0xff) << 8) + ((bs[3] & 0xff) << 0));
+		//2043453625
+		log((bs[0] << 24) | ((bs[1] & 0xff) << 16) | ((bs[2] & 0xff) << 8) | ((bs[3] & 0xff) << 0));
+		//2043453625
+		
+		log("---------------------------------");
+		
+		bs = new byte[4];
+		i = -2043453625;
+		log(i);
+		//-2043453625
+		log(binary(i));
+		//10000110001100110101111101000111
+		bs[0] = (byte)((i >>> 24) & 0xff);
+		log(binary(bs[0]));
+		//10000110
+		bs[1] = (byte)((i >>> 16) & 0xff);
+		log(binary(bs[1]));
+		//00110011
+		bs[2] = (byte)((i >>> 8) & 0xff);
+		log(binary(bs[2]));
+		//01011111
+		bs[3] = (byte)((i >>> 0) & 0xff);
+		log(binary(bs[3]));
+		//01000111
+		log("");
+		log(binary(bs[0] << 24));
+		//10000110000000000000000000000000
+		log(binary((bs[1] & 0xff) << 16));
+		//00000000001100110000000000000000
+		log(binary((bs[2] & 0xff) << 8));
+		//00000000000000000101111100000000
+		log(binary((bs[3] & 0xff) << 0));
+		//00000000000000000000000001000111
+		log((bs[0] << 24) + ((bs[1] & 0xff) << 16) + ((bs[2] & 0xff) << 8) + ((bs[3] & 0xff) << 0));
+		//-2043453625
+		log((bs[0] << 24) | ((bs[1] & 0xff) << 16) | ((bs[2] & 0xff) << 8) | ((bs[3] & 0xff) << 0));
+		//-2043453625
+	}
+	
+	//无符号数，即最高位不是符号位而是数值
+	//Java的数字都是带符号的，所以无符号需要模拟实现
+	//因为同一个类型作为无符号数时的范围会大于作为
+	//有符号数时的范围，因此会用更长的类型存放短类型
+	//的无符号数。
+	//byte类型作为有符号数时范围是-128到127，作为无符
+	//号数时范围时0到255，所以至少需要用short类型来
+	//存放
+	//做法就是把有符号数的字节进行伸长，把因伸长而
+	//产生的高位字节用0填充，因为短类型的无符号数，
+	//在范围上对应于长类型的有符号正数，实际上也是
+	//这样来模拟的。
+	static void unsignedDigit() {
+		byte b = -5;
+		log(b);
+		//-5
+		log(binary(b));
+		//11111011
+		short s = (short)(b & 0xff);
+		log(s);
+		//251
+		log(binary(s));
+		//0000000011111011
+		
+		log("");
+		
+		b = -1;
+		log(b);
+		//-1
+		log(binary(b));
+		//11111111
+		s = (short)(b & 0xff);
+		log(s);
+		//255
+		log(binary(s));
+		//0000000011111111
+		
+		log("");
+		
+		b = -128;
+		log(b);
+		//-128
+		log(binary(b));
+		//10000000
+		s = (short)(b & 0xff);
+		log(s);
+		//128
+		log(binary(s));
+		//0000000010000000
+		
+		log("");
+		
+		s = -30567;
+		log(s);
+		//-30567
+		log(binary(s));
+		//1000100010011001
+		int i = s & 0xffff;
+		log(i);
+		//34969
+		log(binary(i));
+		//00000000000000001000100010011001
 	}
 	
 	static void log(Object o) {
 		System.out.println(o);
+	}
+	
+	static String binary(int i) {
+		return Integer.toBinaryString(i);
 	}
 }
