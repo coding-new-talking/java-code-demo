@@ -13,7 +13,7 @@ import org.cnt.java.utils.Byter;
 public class _ClassFile {
 
 	public static void main(String[] args) throws IOException {
-		String path = "G:\\workspace\\sts4-cnt\\java-code-demo\\target\\classes\\org\\cnt\\java\\classfile\\Broccoli.class";
+		String path = "F:\\workspace\\sts4-cnt\\java-code-demo\\target\\classes\\org\\cnt\\java\\classfile\\Broccoli.class";
 		byte[] bytes = Files.readAllBytes(Paths.get(path));
 		showMagic(bytes);
 		showVersion(bytes);
@@ -56,11 +56,18 @@ public class _ClassFile {
 		log(Byter.toUnsigned(bytes[13]));
 		log(Byter.toUnsigned(bytes[14], bytes[15]));
 		log(new String(bytes, 16, 31));
+		
 		log(Byter.toUnsigned(bytes[47]));
 		log(Byter.toUnsigned(bytes[48], bytes[49]));
 		log(Byter.toUnsigned(bytes[50]));
 		log(Byter.toUnsigned(bytes[51], bytes[52]));
 		log(new String(bytes, 53, 32));
+		
+		log(Byter.toUnsigned(bytes[85]));
+		log(Byter.toUnsigned(bytes[86], bytes[87]));
+		log(Byter.toUnsigned(bytes[88]));
+		log(Byter.toUnsigned(bytes[89], bytes[90]));
+		log(new String(bytes, 91, 30));
 	}
 	
 	static void log(Object o) {

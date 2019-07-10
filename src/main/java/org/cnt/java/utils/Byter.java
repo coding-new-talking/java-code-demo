@@ -5,6 +5,31 @@ package org.cnt.java.utils;
  * @since 2019-07-09
  */
 public class Byter {
+	
+	
+	public static int toUnsigned(byte[] bytes, int offset, int length) {
+		if (length == 1) {
+			return toUnsigned(bytes[offset]);
+		}
+		if (length == 2) {
+			return toUnsigned(bytes[offset], bytes[offset + 1]);
+		}
+		return -1;
+	}
+	
+	public static long toUnsignedLong(byte[] bytes, int offset, int length) {
+		if (length == 1 || length == 2) {
+			return toUnsigned(bytes, offset, length);
+		}
+		if (length == 4) {
+			return toUnsigned(bytes[offset], bytes[offset + 1], bytes[offset + 2], bytes[offset + 3]);
+		}
+		return -1;
+	}
+	
+	public static String toString(byte[] bytes, int offset, int length) {
+		return new String(bytes, offset, length);
+	}
 
 	public static int toUnsigned(byte b) {
 		//把一个byte原样不变的放到int
