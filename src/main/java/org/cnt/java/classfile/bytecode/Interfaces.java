@@ -1,5 +1,7 @@
 package org.cnt.java.classfile.bytecode;
 
+import java.util.Arrays;
+
 import org.cnt.java.classfile.bytecode.unsigned.U2;
 
 /**
@@ -35,5 +37,10 @@ public class Interfaces {
 			indexes[i] = u2s[i].getValue();
 		}
 		return indexes;
+	}
+
+	@Override
+	public String toString() {
+		return "Interfaces [getClassIndexes()=" + Arrays.toString(getClassIndexes()) + "]";
 	}
 }

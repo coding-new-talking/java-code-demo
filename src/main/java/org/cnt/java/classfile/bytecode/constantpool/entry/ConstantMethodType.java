@@ -24,4 +24,9 @@ public class ConstantMethodType extends ConstantEntry {
 	public int getDescriptorIndex() {
 		return descriptorIndex.getIndex();
 	}
+
+	@Override
+	public String toString() {
+		return "ConstantMethodType [getDescriptorIndex()=" + getDescriptorIndex() + ", getTag()=" + getTag() + "]";
+	}
 }

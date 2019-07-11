@@ -21,4 +21,9 @@ public class SuperClass {
 	public int getClassIndex() {
 		return u2.getValue();
 	}
+
+	@Override
+	public String toString() {
+		return "SuperClass [getClassIndex()=" + getClassIndex() + "]";
+	}
 }

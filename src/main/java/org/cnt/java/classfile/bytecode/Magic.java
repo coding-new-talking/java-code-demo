@@ -21,4 +21,9 @@ public class Magic {
 	public long getMagic() {
 		return u4.getValue();
 	}
+
+	@Override
+	public String toString() {
+		return "Magic [getMagic()=0x" + Long.toHexString(getMagic()) + "]";
+	}
 }

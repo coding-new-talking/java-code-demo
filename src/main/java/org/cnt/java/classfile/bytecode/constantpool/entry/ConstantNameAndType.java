@@ -31,4 +31,10 @@ public class ConstantNameAndType extends ConstantEntry {
 	public int getDescriptorIndex() {
 		return descriptorIndex.getIndex();
 	}
+
+	@Override
+	public String toString() {
+		return "ConstantNameAndType [getNameIndex()=" + getNameIndex() + ", getDescriptorIndex()="
+				+ getDescriptorIndex() + ", getTag()=" + getTag() + "]";
+	}
 }

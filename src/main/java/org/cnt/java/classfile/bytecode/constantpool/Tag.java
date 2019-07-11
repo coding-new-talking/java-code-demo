@@ -21,4 +21,9 @@ public class Tag {
 	public int getTag() {
 		return u1.getValue();
 	}
+
+	@Override
+	public String toString() {
+		return "Tag [getTag()=" + getTag() + "]";
+	}
 }

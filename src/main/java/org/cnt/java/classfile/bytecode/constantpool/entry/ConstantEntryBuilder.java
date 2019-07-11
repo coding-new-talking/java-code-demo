@@ -7,6 +7,70 @@ import org.cnt.java.utils.Byter;
  * @since 2019-07-11
  */
 public class ConstantEntryBuilder {
+
+	private byte[] bytes;
+	private int indexDelta;
+	
+	private ConstantEntryBuilder(byte[] bytes) {
+		this.bytes = bytes;
+	}
+	
+	public static ConstantEntryBuilder newBuilder(byte[] bytes) {
+		return new ConstantEntryBuilder(bytes);
+	}
+	
+	public ConstantEntry build(int offset) {
+		int tag = Byter.toUnsigned(bytes[offset]);
+		switch (tag) {
+			case ConstantClass_Tag:
+				indexDelta = 0;
+				return new ConstantClass(bytes, offset);
+			case ConstantFieldRef_Tag:
+				indexDelta = 0;
+				return new ConstantFieldRef(bytes, offset);
+			case ConstantMethodRef_Tag:
+				indexDelta = 0;
+				return new ConstantMethodRef(bytes, offset);
+			case ConstantInterfaceMethodRef_Tag:
+				indexDelta = 0;
+				return new ConstantInterfaceMethodRef(bytes, offset);
+			case ConstantString_Tag:
+				indexDelta = 0;
+				return new ConstantString(bytes, offset);
+			case ConstantInteger_Tag:
+				indexDelta = 0;
+				return new ConstantInteger(bytes, offset);
+			case ConstantFloat_Tag:
+				indexDelta = 0;
+				return new ConstantFloat(bytes, offset);
+			case ConstantLong_Tag:
+				indexDelta = 1;
+				return new ConstantLong(bytes, offset);
+			case ConstantDouble_Tag:
+				indexDelta = 1;
+				return new ConstantDouble(bytes, offset);
+			case ConstantNameAndType_Tag:
+				indexDelta = 0;
+				return new ConstantNameAndType(bytes, offset);
+			case ConstantUtf8_Tag:
+				indexDelta = 0;
+				return new ConstantUtf8(bytes, offset);
+			case ConstantMethodHandle_Tag:
+				indexDelta = 0;
+				return new ConstantMethodHandle(bytes, offset);
+			case ConstantMethodType_Tag:
+				indexDelta = 0;
+				return new ConstantMethodType(bytes, offset);
+			case ConstantInvokeDynamic_Tag:
+				indexDelta = 0;
+				return new ConstantInvokeDynamic(bytes, offset);
+		}
+		return null;
+	}
+	
+	public int getIndexDelta() {
+		return indexDelta;
+	}
 	
 	public static final int ConstantClass_Tag = 7;
 	public static final int ConstantFieldRef_Tag = 9;
@@ -22,39 +86,4 @@ public class ConstantEntryBuilder {
 	public static final int ConstantMethodHandle_Tag = 15;
 	public static final int ConstantMethodType_Tag = 16;
 	public static final int ConstantInvokeDynamic_Tag = 18;
-	
-	public static ConstantEntry build(byte[] bytes, int offset) {
-		int tag = Byter.toUnsigned(bytes[offset]);
-		switch (tag) {
-			case ConstantClass_Tag:
-				return new ConstantClass(bytes, offset);
-			case ConstantFieldRef_Tag:
-				return new ConstantFieldRef(bytes, offset);
-			case ConstantMethodRef_Tag:
-				return new ConstantMethodRef(bytes, offset);
-			case ConstantInterfaceMethodRef_Tag:
-				return new ConstantInterfaceMethodRef(bytes, offset);
-			case ConstantString_Tag:
-				return new ConstantString(bytes, offset);
-			case ConstantInteger_Tag:
-				return new ConstantInteger(bytes, offset);
-			case ConstantFloat_Tag:
-				return new ConstantFloat(bytes, offset);
-			case ConstantLong_Tag:
-				return new ConstantLong(bytes, offset);
-			case ConstantDouble_Tag:
-				return new ConstantDouble(bytes, offset);
-			case ConstantNameAndType_Tag:
-				return new ConstantNameAndType(bytes, offset);
-			case ConstantUtf8_Tag:
-				return new ConstantUtf8(bytes, offset);
-			case ConstantMethodHandle_Tag:
-				return new ConstantMethodHandle(bytes, offset);
-			case ConstantMethodType_Tag:
-				return new ConstantMethodType(bytes, offset);
-			case ConstantInvokeDynamic_Tag:
-				return new ConstantInvokeDynamic(bytes, offset);
-		}
-		return null;
-	}
 }

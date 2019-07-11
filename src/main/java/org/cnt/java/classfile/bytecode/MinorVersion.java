@@ -21,4 +21,9 @@ public class MinorVersion {
 	public int getVersion() {
 		return u2.getValue();
 	}
+
+	@Override
+	public String toString() {
+		return "MinorVersion [getVersion()=" + getVersion() + "]";
+	}
 }

@@ -61,6 +61,11 @@ public class Byter {
 		return toSigned(b3) << 24 | toUnsigned(b2) << 16 | toUnsigned(b1) << 8 | toUnsigned(b0);
 	}
 	
+	public static long toSigned(byte b7, byte b6, byte b5, byte b4, byte b3, byte b2, byte b1, byte b0) {
+		return (long)toSigned(b7) << 56 | (long)toUnsigned(b6) << 48 | (long)toUnsigned(b5) << 40 | (long)toUnsigned(b4) << 32
+				| (long)toUnsigned(b3) << 24 | toUnsigned(b2) << 16 | toUnsigned(b1) << 8 | toUnsigned(b0);
+	}
+	
 	public static void main(String[] args) {
 		
 	}

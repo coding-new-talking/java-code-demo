@@ -31,4 +31,10 @@ public class ConstantFieldRef extends ConstantEntry {
 	public int getNameAndTypeIndex() {
 		return nameAndTypeIndex.getIndex();
 	}
+
+	@Override
+	public String toString() {
+		return "ConstantFieldRef [getClassIndex()=" + getClassIndex() + ", getNameAndTypeIndex()="
+				+ getNameAndTypeIndex() + ", getTag()=" + getTag() + "]";
+	}
 }

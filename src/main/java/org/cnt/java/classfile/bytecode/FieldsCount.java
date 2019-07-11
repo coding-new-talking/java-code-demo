@@ -21,4 +21,9 @@ public class FieldsCount {
 	public int getCount() {
 		return u2.getValue();
 	}
+
+	@Override
+	public String toString() {
+		return "FieldsCount [getCount()=" + getCount() + "]";
+	}
 }

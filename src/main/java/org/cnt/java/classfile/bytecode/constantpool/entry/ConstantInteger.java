@@ -1,6 +1,7 @@
 package org.cnt.java.classfile.bytecode.constantpool.entry;
 
 import org.cnt.java.classfile.bytecode.constantpool.Byte4;
+import org.cnt.java.utils.Byter;
 
 /**
  * @author lixinjie
@@ -21,4 +22,12 @@ public class ConstantInteger extends ConstantEntry {
 		return offset;
 	}
 
+	public int getInt() {
+		return Byter.toSigned(byte4.getByte3(), byte4.getByte2(), byte4.getByte1(), byte4.getByte0());
+	}
+
+	@Override
+	public String toString() {
+		return "ConstantInteger [getInt()=" + getInt() + ", getTag()=" + getTag() + "]";
+	}
 }

@@ -13,10 +13,10 @@ public class U4 {
 	private byte[] bytes;
 	
 	private long value;
-	private byte byte0;
-	private byte byte1;
-	private byte byte2;
 	private byte byte3;
+	private byte byte2;
+	private byte byte1;
+	private byte byte0;
 	
 	public U4(byte[] bytes, int offset) {
 		this.bytes = bytes;
@@ -25,10 +25,10 @@ public class U4 {
 	
 	public int parse() {
 		value = Byter.toUnsignedLong(bytes, offset, length);
-		byte0 = bytes[offset + 0];
-		byte1 = bytes[offset + 1];
-		byte2 = bytes[offset + 2];
-		byte3 = bytes[offset + 3];
+		byte3 = bytes[offset + 0];
+		byte2 = bytes[offset + 1];
+		byte1 = bytes[offset + 2];
+		byte0 = bytes[offset + 3];
 		return offset + length;
 	}
 	
@@ -53,6 +53,6 @@ public class U4 {
 	}
 	
 	public byte[] getBytes() {
-		return new byte[] {byte0, byte1, byte2, byte3};
+		return new byte[] {byte3, byte2, byte1, byte0};
 	}
 }

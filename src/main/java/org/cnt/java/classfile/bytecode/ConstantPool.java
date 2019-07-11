@@ -25,12 +25,29 @@ public class ConstantPool {
 		constantEntries = new ConstantEntry[constantPoolCount];
 		//第0个位置不使用，从第1个位置开始
 		constantEntries[0] = null;
+		ConstantEntryBuilder builder = ConstantEntryBuilder.newBuilder(bytes);
 		for (int i = 1; i < constantPoolCount; i++) {
-			ConstantEntry entry = ConstantEntryBuilder.build(bytes, offset);
+			ConstantEntry entry = builder.build(offset);
 			offset = entry.parse();
 			constantEntries[i] = entry;
+			//对于long和double类型
+			//一个entry占两个索引
+			//这是历史遗留问题
+			if (builder.getIndexDelta() == 1) {
+				constantEntries[++i] = null;
+			}
 		}
 		return offset;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder("ConstantPool [\r\n");
+		for (int i = 0; i < constantPoolCount; i++) {
+			sb.append("#" + i + " = ").append(constantEntries[i]).append("\r\n");
+		}
+		sb.append("]");
+		return sb.toString();
 	}
 	
 }

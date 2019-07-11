@@ -31,4 +31,10 @@ public class ConstantInvokeDynamic extends ConstantEntry {
 	public int getNameAndTypeIndex() {
 		return nameAndTypeIndex.getIndex();
 	}
+
+	@Override
+	public String toString() {
+		return "ConstantInvokeDynamic [getBootstrapMethodAttrIndex()=" + getBootstrapMethodAttrIndex()
+				+ ", getNameAndTypeIndex()=" + getNameAndTypeIndex() + ", getTag()=" + getTag() + "]";
+	}
 }

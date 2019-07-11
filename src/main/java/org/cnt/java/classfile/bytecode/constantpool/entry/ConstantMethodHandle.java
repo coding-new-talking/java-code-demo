@@ -32,4 +32,10 @@ public class ConstantMethodHandle extends ConstantEntry {
 	public int getRefIndex() {
 		return refIndex.getIndex();
 	}
+
+	@Override
+	public String toString() {
+		return "ConstantMethodHandle [getRefKind()=" + getRefKind() + ", getRefIndex()=" + getRefIndex() + ", getTag()="
+				+ getTag() + "]";
+	}
 }

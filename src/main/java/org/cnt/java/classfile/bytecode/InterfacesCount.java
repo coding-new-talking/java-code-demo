@@ -21,4 +21,9 @@ public class InterfacesCount {
 	public int getCount() {
 		return u2.getValue();
 	}
+
+	@Override
+	public String toString() {
+		return "InterfacesCount [getCount()=" + getCount() + "]";
+	}
 }

@@ -11,14 +11,50 @@ public class ByteCode {
 	private MajorVersion majorVersion;
 	private ConstantPoolCount constantPoolCount;
 	private ConstantPool constantPool;
+	private AccessFlags accessFlags;
+	private ThisClass thisClass;
+	private SuperClass superClass;
+	private InterfacesCount interfacesCount;
+	private Interfaces interfaces;
+	private FieldsCount fieldsCount;
 	
+	private MethodsCount methodsCount;
 	
+	private AttributesCount attributesCount;
 	
 	private int offset;
 	private byte[] bytes;
 	
 	public ByteCode(byte[] bytes) {
 		this.bytes = bytes;
+	}
+	
+	public void parse() {
+		parseMagic();
+		parseMinorVersion();
+		parseMajorVersion();
+		parseConstantPoolCount();
+		parseConstantPool();
+		parseAccessFlags();
+		parseThisClass();
+		parseSuperClass();
+		parseInterfacesCount();
+		parseInterfaces();
+		parseFieldsCount();
+	}
+	
+	public void toString(StringBuilder sb) {
+		sb.append(magic).append("\r\n");
+		sb.append(minorVersion).append("\r\n");
+		sb.append(majorVersion).append("\r\n");
+		sb.append(constantPoolCount).append("\r\n");
+		sb.append(constantPool).append("\r\n");
+		sb.append(accessFlags).append("\r\n");
+		sb.append(thisClass).append("\r\n");
+		sb.append(superClass).append("\r\n");
+		sb.append(interfacesCount).append("\r\n");
+		sb.append(interfaces).append("\r\n");
+		sb.append(fieldsCount).append("\r\n");
 	}
 	
 	public void parseMagic() {
@@ -44,5 +80,45 @@ public class ByteCode {
 	public void parseConstantPool() {
 		constantPool = new ConstantPool(bytes, offset, constantPoolCount.getCount());
 		offset = constantPool.parse();
+	}
+	
+	public void parseAccessFlags() {
+		accessFlags = new AccessFlags(bytes, offset);
+		offset = accessFlags.parse();
+	}
+	
+	public void parseThisClass() {
+		thisClass = new ThisClass(bytes, offset);
+		offset = thisClass.parse();
+	}
+	
+	public void parseSuperClass() {
+		superClass = new SuperClass(bytes, offset);
+		offset = superClass.parse();
+	}
+	
+	public void parseInterfacesCount() {
+		interfacesCount = new InterfacesCount(bytes, offset);
+		offset = interfacesCount.parse();
+	}
+	
+	public void parseInterfaces() {
+		interfaces = new Interfaces(bytes, offset, interfacesCount.getCount());
+		offset = interfaces.parse();
+	}
+	
+	public void parseFieldsCount() {
+		fieldsCount = new FieldsCount(bytes, offset);
+		offset = fieldsCount.parse();
+	}
+	
+	public void parseMethodsCount() {
+		methodsCount = new MethodsCount(bytes, offset);
+		offset = methodsCount.parse();
+	}
+	
+	public void parseAttributesCount() {
+		attributesCount = new AttributesCount(bytes, offset);
+		offset = attributesCount.parse();
 	}
 }

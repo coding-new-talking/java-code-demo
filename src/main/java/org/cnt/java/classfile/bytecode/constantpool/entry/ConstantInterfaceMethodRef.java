@@ -31,4 +31,10 @@ public class ConstantInterfaceMethodRef extends ConstantEntry {
 	public int getNameAndTypeIndex() {
 		return nameAndTypeIndex.getIndex();
 	}
+
+	@Override
+	public String toString() {
+		return "ConstantInterfaceMethodRef [getClassIndex()=" + getClassIndex() + ", getNameAndTypeIndex()="
+				+ getNameAndTypeIndex() + ", getTag()=" + getTag() + "]";
+	}
 }

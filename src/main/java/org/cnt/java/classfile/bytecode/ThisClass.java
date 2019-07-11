@@ -21,4 +21,9 @@ public class ThisClass {
 	public int getClassIndex() {
 		return u2.getValue();
 	}
+
+	@Override
+	public String toString() {
+		return "ThisClass [getClassIndex()=" + getClassIndex() + "]";
+	}
 }

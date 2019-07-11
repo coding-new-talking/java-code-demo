@@ -41,4 +41,9 @@ public class Byte4 {
 	public byte[] getBytes() {
 		return u4.getBytes();
 	}
+
+	@Override
+	public String toString() {
+		return "Byte4 [getValue()=" + getValue() + "]";
+	}
 }

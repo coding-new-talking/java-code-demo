@@ -24,4 +24,9 @@ public class ConstantString extends ConstantEntry {
 	public int getStringIndex() {
 		return stringIndex.getIndex();
 	}
+
+	@Override
+	public String toString() {
+		return "ConstantString [getStringIndex()=" + getStringIndex() + ", getTag()=" + getTag() + "]";
+	}
 }

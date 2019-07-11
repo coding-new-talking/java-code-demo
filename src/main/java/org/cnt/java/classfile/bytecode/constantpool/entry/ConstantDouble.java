@@ -1,6 +1,7 @@
 package org.cnt.java.classfile.bytecode.constantpool.entry;
 
 import org.cnt.java.classfile.bytecode.constantpool.Byte4;
+import org.cnt.java.utils.Byter;
 
 /**
  * @author lixinjie
@@ -24,4 +25,14 @@ public class ConstantDouble extends ConstantEntry {
 		return offset;
 	}
 
+	public double getDouble() {
+		return Double.longBitsToDouble(Byter.toSigned(highByte4.getByte3(),
+				highByte4.getByte2(), highByte4.getByte1(), highByte4.getByte0(),
+				lowByte4.getByte3(), lowByte4.getByte2(), lowByte4.getByte1(), lowByte4.getByte0()));
+	}
+
+	@Override
+	public String toString() {
+		return "ConstantDouble [getDouble()=" + getDouble() + ", getTag()=" + getTag() + "]";
+	}
 }

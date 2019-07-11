@@ -21,4 +21,9 @@ public class Index {
 	public int getIndex() {
 		return u2.getValue();
 	}
+
+	@Override
+	public String toString() {
+		return "Index [getIndex()=" + getIndex() + "]";
+	}
 }

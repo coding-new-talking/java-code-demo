@@ -24,4 +24,9 @@ public class ConstantClass extends ConstantEntry {
 	public int getNameIndex() {
 		return nameIndex.getIndex();
 	}
+
+	@Override
+	public String toString() {
+		return "ConstantClass [getNameIndex()=" + getNameIndex() + ", getTag()=" + getTag() + "]";
+	}
 }

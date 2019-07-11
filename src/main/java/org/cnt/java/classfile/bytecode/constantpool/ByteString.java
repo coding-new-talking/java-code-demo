@@ -28,4 +28,9 @@ public class ByteString {
 	public String getString() {
 		return string;
 	}
+
+	@Override
+	public String toString() {
+		return "ByteString [getString()=" + getString() + "]";
+	}
 }

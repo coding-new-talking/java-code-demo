@@ -21,4 +21,9 @@ public class MajorVersion {
 	public int getVersion() {
 		return u2.getValue();
 	}
+
+	@Override
+	public String toString() {
+		return "MajorVersion [getVersion()=" + getVersion() + "]";
+	}
 }

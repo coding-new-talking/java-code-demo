@@ -21,4 +21,9 @@ public class Length2 {
 	public int getLength() {
 		return u2.getValue();
 	}
+
+	@Override
+	public String toString() {
+		return "Length2 [getLength()=" + getLength() + "]";
+	}
 }

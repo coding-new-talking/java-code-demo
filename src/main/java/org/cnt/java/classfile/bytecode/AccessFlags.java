@@ -22,6 +22,11 @@ public class AccessFlags {
 		return u2.getValue();
 	}
 	
+	@Override
+	public String toString() {
+		return "AccessFlags [getAccessFlags()=0x" + Integer.toHexString(getAccessFlags()) + "]";
+	}
+
 	public static final int ACC_PUBLIC = 0x0001;
 	public static final int ACC_FINAL = 0x0010;
 	public static final int ACC_SUPER = 0x0020;

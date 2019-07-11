@@ -32,4 +32,10 @@ public class ConstantUtf8 extends ConstantEntry {
 	public String getString() {
 		return byteString.getString();
 	}
+
+	@Override
+	public String toString() {
+		return "ConstantUtf8 [getLength()=" + getLength() + ", getString()=" + getString() + ", getTag()=" + getTag()
+				+ "]";
+	}
 }

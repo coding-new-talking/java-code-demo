@@ -21,4 +21,9 @@ public class RefKind {
 	public int getRefKind() {
 		return u1.getValue();
 	}
+
+	@Override
+	public String toString() {
+		return "RefKind [getRefKind()=" + getRefKind() + "]";
+	}
 }

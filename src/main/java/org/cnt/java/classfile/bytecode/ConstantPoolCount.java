@@ -21,4 +21,9 @@ public class ConstantPoolCount {
 	public int getCount() {
 		return u2.getValue();
 	}
+
+	@Override
+	public String toString() {
+		return "ConstantPoolCount [getCount()=" + getCount() + "]";
+	}
 }

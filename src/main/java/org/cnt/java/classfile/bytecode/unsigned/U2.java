@@ -13,8 +13,8 @@ public class U2 {
 	private byte[] bytes;
 	
 	private int value;
-	private byte byte0;
 	private byte byte1;
+	private byte byte0;
 	
 	public U2(byte[] bytes, int offset) {
 		this.bytes = bytes;
@@ -23,8 +23,8 @@ public class U2 {
 	
 	public int parse() {
 		value = Byter.toUnsigned(bytes, offset, length);
-		byte0 = bytes[offset + 0];
-		byte1 = bytes[offset + 1];
+		byte1 = bytes[offset + 0];
+		byte0 = bytes[offset + 1];
 		return offset + length;
 	}
 	
@@ -41,6 +41,6 @@ public class U2 {
 	}
 	
 	public byte[] getBytes() {
-		return new byte[] {byte0, byte1};
+		return new byte[] {byte1, byte0};
 	}
 }

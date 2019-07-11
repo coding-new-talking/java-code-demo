@@ -20,4 +20,8 @@ public abstract class ConstantEntry {
 	}
 	
 	public abstract int parse();
+	
+	public int getTag() {
+		return tag.getTag();
+	}
 }
