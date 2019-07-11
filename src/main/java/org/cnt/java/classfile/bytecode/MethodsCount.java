@@ -6,11 +6,11 @@ import org.cnt.java.classfile.bytecode.unsigned.U2;
  * @author lixinjie
  * @since 2019-07-11
  */
-public class SuperClass {
+public class MethodsCount {
 	
 	private U2 u2;
 	
-	public SuperClass(byte[] bytes, int offset) {
+	public MethodsCount(byte[] bytes, int offset) {
 		this.u2 = new U2(bytes, offset);
 	}
 	
@@ -18,7 +18,7 @@ public class SuperClass {
 		return u2.parse();
 	}
 
-	public int getClassIndex() {
+	public int getCount() {
 		return u2.getValue();
 	}
 }

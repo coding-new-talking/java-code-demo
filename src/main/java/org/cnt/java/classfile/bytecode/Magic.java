@@ -1,6 +1,6 @@
 package org.cnt.java.classfile.bytecode;
 
-import org.cnt.java.utils.Byter;
+import org.cnt.java.classfile.bytecode.unsigned.U4;
 
 /**
  * @author lixinjie
@@ -8,18 +8,17 @@ import org.cnt.java.utils.Byter;
  */
 public class Magic {
 
-	public int offset = 0;
-	public int length = 4;
+	private U4 u4;
 	
-	private byte[] bytes;
-	public long magic;
-	
-	public Magic(byte[] bytes) {
-		this.bytes = bytes;
+	public Magic(byte[] bytes, int offset) {
+		this.u4 = new U4(bytes, offset);
 	}
 	
 	public int parse() {
-		magic = Byter.toUnsignedLong(bytes, offset, length);
-		return offset + length;
+		return u4.parse();
+	}
+
+	public long getMagic() {
+		return u4.getValue();
 	}
 }

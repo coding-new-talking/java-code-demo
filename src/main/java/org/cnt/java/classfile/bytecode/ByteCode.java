@@ -7,12 +7,14 @@ package org.cnt.java.classfile.bytecode;
 public class ByteCode {
 
 	private Magic magic;
-	private Version version;
+	private MinorVersion minorVersion;
+	private MajorVersion majorVersion;
+	private ConstantPoolCount constantPoolCount;
 	private ConstantPool constantPool;
 	
 	
 	
-	private int index;
+	private int offset;
 	private byte[] bytes;
 	
 	public ByteCode(byte[] bytes) {
@@ -20,17 +22,27 @@ public class ByteCode {
 	}
 	
 	public void parseMagic() {
-		magic = new Magic(bytes);
-		index = magic.parse();
+		magic = new Magic(bytes, offset);
+		offset = magic.parse();
 	}
 	
-	public void parseVersion() {
-		version = new Version(bytes);
-		index = version.parse();
+	public void parseMinorVersion() {
+		minorVersion = new MinorVersion(bytes, offset);
+		offset = minorVersion.parse();
+	}
+	
+	public void parseMajorVersion() {
+		majorVersion = new MajorVersion(bytes, offset);
+		offset = majorVersion.parse();
+	}
+	
+	public void parseConstantPoolCount() {
+		constantPoolCount = new ConstantPoolCount(bytes, offset);
+		offset = constantPoolCount.parse();
 	}
 	
 	public void parseConstantPool() {
-		constantPool = new ConstantPool(bytes);
-		index = constantPool.parse();
+		constantPool = new ConstantPool(bytes, offset, constantPoolCount.getCount());
+		offset = constantPool.parse();
 	}
 }
