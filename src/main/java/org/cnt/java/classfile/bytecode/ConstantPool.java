@@ -1,7 +1,7 @@
 package org.cnt.java.classfile.bytecode;
 
-import org.cnt.java.classfile.bytecode.constantpool.entry.ConstantEntry;
-import org.cnt.java.classfile.bytecode.constantpool.entry.ConstantEntryBuilder;
+import org.cnt.java.classfile.bytecode.constantpool.ConstantEntry;
+import org.cnt.java.classfile.bytecode.constantpool.ConstantEntryBuilder;
 
 /**
  * @author lixinjie
