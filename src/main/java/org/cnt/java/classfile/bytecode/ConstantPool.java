@@ -2,6 +2,7 @@ package org.cnt.java.classfile.bytecode;
 
 import org.cnt.java.classfile.bytecode.constantpool.ConstantEntry;
 import org.cnt.java.classfile.bytecode.constantpool.ConstantEntryBuilder;
+import org.cnt.java.classfile.bytecode.constantpool.ConstantUtf8;
 
 /**
  * @author lixinjie
@@ -50,4 +51,15 @@ public class ConstantPool {
 		return sb.toString();
 	}
 	
+	public ConstantEntry getConstantEntry(int index) {
+		return constantEntries[index];
+	}
+	
+	public ConstantUtf8 getConstantUtf8(int index) {
+		return (ConstantUtf8)constantEntries[index];
+	}
+	
+	public String getConstantUtf8String(int index) {
+		return getConstantUtf8(index).getString();
+	}
 }

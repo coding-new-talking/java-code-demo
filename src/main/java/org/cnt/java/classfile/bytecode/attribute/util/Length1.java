@@ -6,11 +6,11 @@ import org.cnt.java.classfile.bytecode.unsigned.U1;
  * @author lixinjie
  * @since 2019-07-11
  */
-public class Index1 {
+public class Length1 {
 	
 	private U1 u1;
 	
-	public Index1(byte[] bytes, int offset) {
+	public Length1(byte[] bytes, int offset) {
 		this.u1 = new U1(bytes, offset);
 	}
 	
@@ -18,12 +18,12 @@ public class Index1 {
 		return u1.parse();
 	}
 	
-	public int getIndex() {
+	public int getLength() {
 		return u1.getValue();
 	}
 
 	@Override
 	public String toString() {
-		return "Index1 [getIndex()=" + getIndex() + "]";
+		return "Length1 [getLength()=" + getLength() + "]";
 	}
 }
