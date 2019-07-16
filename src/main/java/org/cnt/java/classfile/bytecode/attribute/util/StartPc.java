@@ -1,4 +1,4 @@
-package org.cnt.java.classfile.bytecode;
+package org.cnt.java.classfile.bytecode.attribute.util;
 
 import org.cnt.java.classfile.bytecode.unsigned.U2;
 
@@ -6,24 +6,24 @@ import org.cnt.java.classfile.bytecode.unsigned.U2;
  * @author lixinjie
  * @since 2019-07-11
  */
-public class MethodsCount {
+public class StartPc {
 	
 	private U2 u2;
 	
-	public MethodsCount(byte[] bytes, int offset) {
+	public StartPc(byte[] bytes, int offset) {
 		this.u2 = new U2(bytes, offset);
 	}
 	
 	public int parse() {
 		return u2.parse();
 	}
-
-	public int getCount() {
+	
+	public int getStartPc() {
 		return u2.getValue();
 	}
 
 	@Override
 	public String toString() {
-		return "MethodsCount [getCount()=" + getCount() + "]";
+		return "StartPc [getStartPc()=" + getStartPc() + "]";
 	}
 }

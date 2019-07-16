@@ -17,9 +17,9 @@ public class ByteCode {
 	private InterfacesCount interfacesCount;
 	private Interfaces interfaces;
 	private FieldsCount fieldsCount;
-	
+	private Fields fields;
 	private MethodsCount methodsCount;
-	
+	private Methods methods;
 	private AttributesCount attributesCount;
 	
 	private int offset;
@@ -41,6 +41,9 @@ public class ByteCode {
 		parseInterfacesCount();
 		parseInterfaces();
 		parseFieldsCount();
+		parseFields();
+		parseMethodsCount();
+		parseMethods();
 	}
 	
 	public void toString(StringBuilder sb) {
@@ -55,6 +58,9 @@ public class ByteCode {
 		sb.append(interfacesCount).append("\r\n");
 		sb.append(interfaces).append("\r\n");
 		sb.append(fieldsCount).append("\r\n");
+		sb.append(fields).append("\r\n");
+		sb.append(methodsCount).append("\r\n");
+		sb.append(methods).append("\r\n");
 	}
 	
 	public void parseMagic() {
@@ -112,9 +118,19 @@ public class ByteCode {
 		offset = fieldsCount.parse();
 	}
 	
+	public void parseFields() {
+		fields = new Fields(bytes, offset, fieldsCount.getCount(), constantPool);
+		offset = fields.parse();
+	}
+	
 	public void parseMethodsCount() {
 		methodsCount = new MethodsCount(bytes, offset);
 		offset = methodsCount.parse();
+	}
+	
+	public void parseMethods() {
+		methods = new Methods(bytes, offset, methodsCount.getCount(), constantPool);
+		offset = methods.parse();
 	}
 	
 	public void parseAttributesCount() {

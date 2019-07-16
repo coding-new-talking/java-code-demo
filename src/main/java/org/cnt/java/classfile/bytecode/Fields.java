@@ -30,4 +30,15 @@ public class Fields {
 		}
 		return offset;
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder("Fields [\r\n");
+		for (int i = 0, len = fields.length; i < len; i++) {
+			sb.append("#" + i).append(" = ")
+				.append(fields[i]).append("\r\n");
+		}
+		sb.append("]");
+		return sb.toString();
+	}
 }

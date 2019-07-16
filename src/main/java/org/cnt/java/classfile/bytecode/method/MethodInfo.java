@@ -1,4 +1,4 @@
-package org.cnt.java.classfile.bytecode.field;
+package org.cnt.java.classfile.bytecode.method;
 
 import java.util.Arrays;
 
@@ -10,28 +10,28 @@ import org.cnt.java.classfile.bytecode.field.util.Count2;
 
 /**
  * @author lixinjie
- * @since 2019-07-15
+ * @since 2019-07-16
  */
-public class FieldInfo {
+public class MethodInfo {
 
 	private int offset;
 	private byte[] bytes;
 	private ConstantPool constantPool;
-	
-	private FieldAccessFlags accessFlags;
+
+	private MethodAccessFlags accessFlags;
 	private Index2 nameIndex;
 	private Index2 descriptorIndex;
 	private Count2 attributesCount;
 	private AttributeInfo[] attributes;
 	
-	public FieldInfo(byte[] bytes, int offset, ConstantPool constantPool) {
+	public MethodInfo(byte[] bytes, int offset, ConstantPool constantPool) {
 		this.bytes = bytes;
 		this.offset = offset;
 		this.constantPool = constantPool;
 	}
 	
 	public int parse() {
-		accessFlags = new FieldAccessFlags(bytes, offset);
+		accessFlags = new MethodAccessFlags(bytes, offset);
 		offset = accessFlags.parse();
 		nameIndex = new Index2(bytes, offset);
 		offset = nameIndex.parse();
@@ -47,7 +47,7 @@ public class FieldInfo {
 		}
 		return offset;
 	}
-
+	
 	public int getAccessFlags() {
 		return accessFlags.getAccessFlags();
 	}
@@ -70,8 +70,9 @@ public class FieldInfo {
 
 	@Override
 	public String toString() {
-		return "FieldInfo [getAccessFlags()=0x" + Integer.toHexString(getAccessFlags()) + ", getNameIndex()=" + getNameIndex()
+		return "MethodInfo [getAccessFlags()=0x" + Integer.toHexString(getAccessFlags()) + ", getNameIndex()=" + getNameIndex()
 				+ ", getDescriptorIndex()=" + getDescriptorIndex() + ", getAttributesCount()=" + getAttributesCount()
 				+ ", getAttributes()=" + Arrays.toString(getAttributes()) + "]";
 	}
+	
 }

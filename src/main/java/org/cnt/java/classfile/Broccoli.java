@@ -7,6 +7,9 @@ package org.cnt.java.classfile;
  */
 public class Broccoli extends Vegetable implements Organic {
 	
+	private double price;
+	private double weight;
+	
 	@Override
 	public String getCertification() {
 		return "china";
@@ -24,4 +27,13 @@ public class Broccoli extends Vegetable implements Organic {
 	public String fruit() {
 		return "perfect";
 	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public double getWeight() {
+		return weight;
+	}
+	
 }
