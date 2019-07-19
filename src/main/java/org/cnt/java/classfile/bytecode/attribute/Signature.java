@@ -20,4 +20,14 @@ public class Signature extends AttributeInfo {
 		offset = signatureIndex.parse();
 		return offset;
 	}
+	
+	public int getSignatureIndex() {
+		return signatureIndex.getIndex();
+	}
+
+	@Override
+	public String toString() {
+		return "Signature [getSignatureIndex()=" + getSignatureIndex() + ", getAttributeNameIndex()="
+				+ getAttributeNameIndex() + ", getAttributeLength()=" + getAttributeLength() + "]";
+	}
 }

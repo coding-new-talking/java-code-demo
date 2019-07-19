@@ -1,5 +1,10 @@
 package org.cnt.java.classfile;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * <p>西兰花
  * @author lixinjie
@@ -9,6 +14,9 @@ public class Broccoli extends Vegetable implements Organic {
 	
 	private double price;
 	private double weight;
+	protected List<String> history = new ArrayList<>();
+	public Map<Integer, Double> perDay = new HashMap<>(); 
+	protected Double rate;
 	
 	@Override
 	public String getCertification() {
@@ -36,4 +44,8 @@ public class Broccoli extends Vegetable implements Organic {
 		return weight;
 	}
 	
+	
+	public String str(String sss, Integer iii) {
+		return sss + iii;
+	}
 }

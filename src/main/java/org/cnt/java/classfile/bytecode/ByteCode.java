@@ -43,7 +43,7 @@ public class ByteCode {
 		parseFieldsCount();
 		parseFields();
 		parseMethodsCount();
-		parseMethods();
+		//parseMethods();
 	}
 	
 	public void toString(StringBuilder sb) {
@@ -60,7 +60,7 @@ public class ByteCode {
 		sb.append(fieldsCount).append("\r\n");
 		sb.append(fields).append("\r\n");
 		sb.append(methodsCount).append("\r\n");
-		sb.append(methods).append("\r\n");
+		//sb.append(methods).append("\r\n");
 	}
 	
 	public void parseMagic() {
