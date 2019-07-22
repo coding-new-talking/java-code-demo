@@ -2,6 +2,7 @@ package org.cnt.java.classfile.bytecode.attribute;
 
 import org.cnt.java.classfile.bytecode.ConstantPool;
 import org.cnt.java.classfile.bytecode.attribute.util.ExceptionTable;
+import org.cnt.java.classfile.bytecode.attribute.util.JvmCode;
 import org.cnt.java.classfile.bytecode.attribute.util.Length4;
 import org.cnt.java.classfile.bytecode.attribute.util.Num2;
 import org.cnt.java.classfile.bytecode.constantpool.util.Length2;
@@ -18,7 +19,7 @@ public class Code extends AttributeInfo {
 	private Num2 maxStack;
 	private Num2 maxLocals;
 	private Length4 codeLength;
-	private int[] codes;
+	private JvmCode jvmCode;
 	private Length2 exceptionTableLength;
 	private ExceptionTable[] exceptionTables;
 	private Count2 attributesCount;
@@ -37,8 +38,8 @@ public class Code extends AttributeInfo {
 		offset = maxLocals.parse();
 		codeLength = new Length4(bytes, offset);
 		offset = codeLength.parse();
-		codes = new int[(int)codeLength.getLength()];
-		
+		jvmCode = new JvmCode(bytes, offset, (int)codeLength.getLength());
+		offset = jvmCode.parse();
 		exceptionTableLength = new Length2(bytes, offset);
 		offset = exceptionTableLength.parse();
 		exceptionTables = new ExceptionTable[exceptionTableLength.getLength()];
