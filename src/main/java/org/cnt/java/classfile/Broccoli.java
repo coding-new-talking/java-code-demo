@@ -10,6 +10,7 @@ import java.util.Map;
  * @author lixinjie
  * @since 2019-07-09
  */
+@Health(name = "健康")
 public class Broccoli extends Vegetable implements Organic {
 	
 	private double price;
