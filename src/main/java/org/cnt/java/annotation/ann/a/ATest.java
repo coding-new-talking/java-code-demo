@@ -20,8 +20,10 @@ public class ATest {
 		Ann01 ann01 = ATest.class.getAnnotation(Ann01.class);
 		System.out.println(ann01.id());
 		System.out.println(ann01.annotationType().getDeclaredMethod("id").getDefaultValue());
+		System.out.println(ann01);
 		Ann02 ann02 = ATest.class.getAnnotation(Ann02.class);
 		System.out.println(ann02.id());
 		System.out.println(ann02.annotationType().getDeclaredMethod("id").getDefaultValue());
+		System.out.println(ann02);
 	}
 }
