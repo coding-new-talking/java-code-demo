@@ -24,4 +24,9 @@ public class SourceFile extends AttributeInfo {
 	public int getSourcefileIndex() {
 		return sourcefileIndex.getIndex();
 	}
+
+	@Override
+	public String toString() {
+		return "SourceFile [getSourcefileIndex()=" + getSourcefileIndex() + "]";
+	}
 }

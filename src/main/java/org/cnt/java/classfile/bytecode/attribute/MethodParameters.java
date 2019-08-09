@@ -1,5 +1,7 @@
 package org.cnt.java.classfile.bytecode.attribute;
 
+import java.util.Arrays;
+
 import org.cnt.java.classfile.bytecode.attribute.util.Parameter;
 import org.cnt.java.classfile.bytecode.method.util.Count1;
 
@@ -28,4 +30,17 @@ public class MethodParameters extends AttributeInfo {
 		return offset;
 	}
 	
+	public int getParametersCount() {
+		return parametersCount.getCount();
+	}
+	
+	public Parameter[] getParameters() {
+		return parameters;
+	}
+
+	@Override
+	public String toString() {
+		return "MethodParameters [getParametersCount()=" + getParametersCount() + ", getParameters()="
+				+ Arrays.toString(getParameters()) + "]";
+	}
 }

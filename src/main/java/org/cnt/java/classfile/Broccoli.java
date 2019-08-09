@@ -33,7 +33,7 @@ public class Broccoli extends Vegetable implements Organic {
 		return 0.2;
 	}
 	
-	public String fruit() {
+	public String fruit() throws Throwable {
 		return "perfect";
 	}
 
@@ -41,10 +41,9 @@ public class Broccoli extends Vegetable implements Organic {
 		return price;
 	}
 
-	public double getWeight() {
+	public double getWeight() throws Exception {
 		return weight;
 	}
-	
 	
 	public String str(String sss, Integer iii) {
 		return sss + iii;

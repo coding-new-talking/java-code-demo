@@ -21,12 +21,14 @@ public class ByteCode {
 	private MethodsCount methodsCount;
 	private Methods methods;
 	private AttributesCount attributesCount;
+	private Attributes attributes;
 	
 	private int offset;
 	private byte[] bytes;
 	
 	public ByteCode(byte[] bytes) {
 		this.bytes = bytes;
+		this.offset = 0;
 	}
 	
 	public void parse() {
@@ -43,10 +45,13 @@ public class ByteCode {
 		parseFieldsCount();
 		parseFields();
 		parseMethodsCount();
-		//parseMethods();
+		parseMethods();
+		parseAttributesCount();
+		parseAttributes();
 	}
 	
 	public void toString(StringBuilder sb) {
+		sb.append("-----bytes=" + bytes.length + ", offset=0-----\r\n");
 		sb.append(magic).append("\r\n");
 		sb.append(minorVersion).append("\r\n");
 		sb.append(majorVersion).append("\r\n");
@@ -60,7 +65,10 @@ public class ByteCode {
 		sb.append(fieldsCount).append("\r\n");
 		sb.append(fields).append("\r\n");
 		sb.append(methodsCount).append("\r\n");
-		//sb.append(methods).append("\r\n");
+		sb.append(methods).append("\r\n");
+		sb.append(attributesCount).append("\r\n");
+		sb.append(attributes).append("\r\n");
+		sb.append("-----bytes=" + bytes.length + ", offset=" + offset + "-----\r\n");
 	}
 	
 	public void parseMagic() {
@@ -136,5 +144,10 @@ public class ByteCode {
 	public void parseAttributesCount() {
 		attributesCount = new AttributesCount(bytes, offset);
 		offset = attributesCount.parse();
+	}
+	
+	public void parseAttributes() {
+		attributes = new Attributes(bytes, offset, attributesCount.getCount(), constantPool);
+		offset = attributes.parse();
 	}
 }

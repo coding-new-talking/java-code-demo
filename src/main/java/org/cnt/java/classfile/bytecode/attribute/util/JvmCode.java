@@ -29,4 +29,12 @@ public class JvmCode {
 		return offset;
 	}
 	
+	public int getCode() {
+		return codeLength;
+	}
+
+	@Override
+	public String toString() {
+		return "JvmCode [getCode()=" + getCode() + "]";
+	}
 }

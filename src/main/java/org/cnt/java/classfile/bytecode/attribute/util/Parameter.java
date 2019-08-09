@@ -34,4 +34,9 @@ public class Parameter {
 	public int getAccessFlags() {
 		return accessFlags.getAccessFlags();
 	}
+
+	@Override
+	public String toString() {
+		return "Parameter [getNameIndex()=" + getNameIndex() + ", getAccessFlags()=0x" + Integer.toHexString(getAccessFlags()) + "]";
+	}
 }

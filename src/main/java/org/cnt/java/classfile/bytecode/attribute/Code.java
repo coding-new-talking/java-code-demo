@@ -1,5 +1,7 @@
 package org.cnt.java.classfile.bytecode.attribute;
 
+import java.util.Arrays;
+
 import org.cnt.java.classfile.bytecode.ConstantPool;
 import org.cnt.java.classfile.bytecode.attribute.util.ExceptionTable;
 import org.cnt.java.classfile.bytecode.attribute.util.JvmCode;
@@ -48,6 +50,7 @@ public class Code extends AttributeInfo {
 			offset = exceptionTables[i].parse();
 		}
 		attributesCount = new Count2(bytes, offset);
+		offset = attributesCount.parse();
 		attributes = new AttributeInfo[attributesCount.getCount()];
 		AttributeInfoBuilder builder = AttributeInfoBuilder.newBuilder(bytes, constantPool);
 		for (int i = 0, len = attributes.length; i < len; i++) {
@@ -57,4 +60,44 @@ public class Code extends AttributeInfo {
 		return offset;
 	}
 	
+	public int getMaxStack() {
+		return maxStack.getNum();
+	}
+	
+	public int getMaxLocals() {
+		return maxLocals.getNum();
+	}
+	
+	public long getCodeLength() {
+		return codeLength.getLength();
+	}
+	
+	public JvmCode getJvmCode() {
+		return jvmCode;
+	}
+	
+	public int getExceptionTableLength() {
+		return exceptionTableLength.getLength();
+	}
+	
+	public ExceptionTable[] getExceptionTables() {
+		return exceptionTables;
+	}
+	
+	public int getAttributesCount() {
+		return attributesCount.getCount();
+	}
+	
+	public AttributeInfo[] getAttributes() {
+		return attributes;
+	}
+
+	@Override
+	public String toString() {
+		return "Code [getMaxStack()=" + getMaxStack() + ", getMaxLocals()=" + getMaxLocals() + ", getCodeLength()="
+				+ getCodeLength() + ", getJvmCode()=" + getJvmCode() + ", getExceptionTableLength()="
+				+ getExceptionTableLength() + ", getExceptionTables()=" + Arrays.toString(getExceptionTables())
+				+ ", getAttributesCount()=" + getAttributesCount() + ", getAttributes()="
+				+ Arrays.toString(getAttributes()) + "]";
+	}
 }

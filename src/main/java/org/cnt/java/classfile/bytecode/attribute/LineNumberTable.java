@@ -1,5 +1,7 @@
 package org.cnt.java.classfile.bytecode.attribute;
 
+import java.util.Arrays;
+
 import org.cnt.java.classfile.bytecode.attribute.util.LineNumTable;
 import org.cnt.java.classfile.bytecode.constantpool.util.Length2;
 
@@ -26,6 +28,20 @@ public class LineNumberTable extends AttributeInfo {
 			offset = lineNumTables[i].parse();
 		}
 		return offset;
+	}
+
+	public int getLineNumTableLength() {
+		return lineNumTableLength.getLength();
+	}
+
+	public LineNumTable[] getLineNumTables() {
+		return lineNumTables;
+	}
+
+	@Override
+	public String toString() {
+		return "LineNumberTable [getLineNumTableLength()=" + getLineNumTableLength() + ", getLineNumTables()="
+				+ Arrays.toString(getLineNumTables()) + "]";
 	}
 	
 }

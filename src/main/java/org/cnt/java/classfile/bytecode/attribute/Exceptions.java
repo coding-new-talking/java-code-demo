@@ -1,5 +1,7 @@
 package org.cnt.java.classfile.bytecode.attribute;
 
+import java.util.Arrays;
+
 import org.cnt.java.classfile.bytecode.attribute.util.Num2;
 import org.cnt.java.classfile.bytecode.constantpool.util.Index2;
 
@@ -26,6 +28,24 @@ public class Exceptions extends AttributeInfo {
 			offset = exceptionIndexTable[i].parse();
 		}
 		return offset;
+	}
+
+	public int getNumberOfExceptions() {
+		return numberOfExceptions.getNum();
+	}
+
+	public int[] getExceptionIndexTable() {
+		int[] indexTable = new int[exceptionIndexTable.length];
+		for (int i = 0; i < exceptionIndexTable.length; i++) {
+			indexTable[i] = exceptionIndexTable[i].getIndex();
+		}
+		return indexTable;
+	}
+
+	@Override
+	public String toString() {
+		return "Exceptions [getNumberOfExceptions()=" + getNumberOfExceptions() + ", getExceptionIndexTable()="
+				+ Arrays.toString(getExceptionIndexTable()) + "]";
 	}
 	
 }

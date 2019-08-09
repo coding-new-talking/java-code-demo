@@ -32,4 +32,9 @@ public class LineNumTable {
 	public int getLineNumber() {
 		return lineNumber.getLineNumber();
 	}
+
+	@Override
+	public String toString() {
+		return "LineNumTable [getStartPc()=" + getStartPc() + ", getLineNumber()=" + getLineNumber() + "]";
+	}
 }

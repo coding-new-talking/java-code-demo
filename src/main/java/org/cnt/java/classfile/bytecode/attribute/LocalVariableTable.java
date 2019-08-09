@@ -1,5 +1,7 @@
 package org.cnt.java.classfile.bytecode.attribute;
 
+import java.util.Arrays;
+
 import org.cnt.java.classfile.bytecode.attribute.util.LocalVarTable;
 import org.cnt.java.classfile.bytecode.constantpool.util.Length2;
 
@@ -26,6 +28,20 @@ public class LocalVariableTable extends AttributeInfo {
 			offset = localVarTables[i].parse();
 		}
 		return offset;
+	}
+
+	public int getLocalVarTableLength() {
+		return localVarTableLength.getLength();
+	}
+
+	public LocalVarTable[] getLocalVarTables() {
+		return localVarTables;
+	}
+
+	@Override
+	public String toString() {
+		return "LocalVariableTable [getLocalVarTableLength()=" + getLocalVarTableLength() + ", getLocalVarTables()="
+				+ Arrays.toString(getLocalVarTables()) + "]";
 	}
 	
 }

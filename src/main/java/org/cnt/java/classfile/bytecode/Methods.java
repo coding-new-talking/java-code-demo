@@ -8,9 +8,10 @@ import org.cnt.java.classfile.bytecode.method.MethodInfo;
  */
 public class Methods {
 
-	private int methodsCount;
 	private int offset;
 	private byte[] bytes;
+	
+	private int methodsCount;
 	private ConstantPool constantPool;
 
 	private MethodInfo[] methods;

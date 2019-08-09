@@ -8,9 +8,10 @@ import org.cnt.java.classfile.bytecode.field.FieldInfo;
  */
 public class Fields {
 
-	private int fieldsCount;
 	private int offset;
 	private byte[] bytes;
+	
+	private int fieldsCount;
 	private ConstantPool constantPool;
 	
 	private FieldInfo[] fields;

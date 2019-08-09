@@ -56,4 +56,11 @@ public class LocalVarTable {
 	public int getIndex() {
 		return index.getIndex();
 	}
+
+	@Override
+	public String toString() {
+		return "LocalVarTable [getStartPc()=" + getStartPc() + ", getLength()=" + getLength() + ", getNameIndex()="
+				+ getNameIndex() + ", getDescriptorIndex()=" + getDescriptorIndex() + ", getIndex()=" + getIndex()
+				+ "]";
+	}
 }

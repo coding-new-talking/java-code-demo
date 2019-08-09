@@ -32,5 +32,27 @@ public class ExceptionTable {
 		offset = catchType.parse();
 		return offset;
 	}
+
+	public int getStartPc() {
+		return startPc.getStartPc();
+	}
+
+	public int getEndPc() {
+		return endPc.getEndPc();
+	}
+
+	public int getHandlerPc() {
+		return handlerPc.getHandlerPc();
+	}
+
+	public int getCatchType() {
+		return catchType.getIndex();
+	}
+
+	@Override
+	public String toString() {
+		return "ExceptionTable [getStartPc()=" + getStartPc() + ", getEndPc()=" + getEndPc() + ", getHandlerPc()="
+				+ getHandlerPc() + ", getCatchType()=" + getCatchType() + "]";
+	}
 	
 }
