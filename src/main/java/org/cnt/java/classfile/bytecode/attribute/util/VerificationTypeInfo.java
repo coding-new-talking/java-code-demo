@@ -6,13 +6,29 @@ package org.cnt.java.classfile.bytecode.attribute.util;
  */
 public class VerificationTypeInfo {
 
-	private Top_variable_info;
-	private Integer_variable_info;
-	private Float_variable_info;
-	private Long_variable_info;
-	private Double_variable_info;
-	private Null_variable_info;
-	private UninitializedThis_variable_info;
-	private Object_variable_info;
-	private Uninitialized_variable_info;
+	private byte[] bytes;
+	private int offset;
+	
+	private VariableInfo variableInfo;
+
+	public VerificationTypeInfo(byte[] bytes, int offset) {
+		this.bytes = bytes;
+		this.offset = offset;
+	}
+	
+	public int parse() {
+		VariableInfoBuilder builder = VariableInfoBuilder.newBuilder(bytes);
+		variableInfo = builder.build(offset);
+		offset = variableInfo.parse();
+		return offset;
+	}
+
+	public VariableInfo getVariableInfo() {
+		return variableInfo;
+	}
+
+	@Override
+	public String toString() {
+		return "VerificationTypeInfo [getVariableInfo()=" + getVariableInfo() + "]";
+	}
 }

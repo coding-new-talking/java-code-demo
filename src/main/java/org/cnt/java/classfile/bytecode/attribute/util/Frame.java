@@ -22,11 +22,17 @@ public abstract class Frame {
 		return offset;
 	}
 	
+	public int getFrameType() {
+		return frameType.getFrameType();
+	}
+
 	public static final int SAME_Begin = 0;
 	public static final int SAME_End = 63;
 	
 	public static final int SAME_LOCALS_1_STACK_ITEM_Begin = 64;
 	public static final int SAME_LOCALS_1_STACK_ITEM_End = 127;
+	
+	//the range [128-246] are reserved for future use.
 	
 	public static final int SAME_LOCALS_1_STACK_ITEM_EXTENDED = 247;
 	

@@ -24,7 +24,6 @@ public class AttributeInfoBuilder {
 	public AttributeInfo build(int offset) {
 		int attributeNameIndex = Byter.toUnsigned(bytes[offset], bytes[offset + 1]);
 		String attributeName = constantPool.getConstantUtf8String(attributeNameIndex);
-		System.out.println(attributeName);
 		switch (attributeName) {
 			case ConstantValue_Attribute:
 				return new ConstantValue(bytes, offset);
