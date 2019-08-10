@@ -16,6 +16,7 @@ public class _ClassFile {
 	public static void main(String[] args) throws IOException {
 		String project = new File("").getCanonicalPath();
 		String path = project + "\\target\\classes\\org\\cnt\\java\\classfile\\Broccoli.class";
+		path = "C:\\Users\\Administrator\\Desktop\\AnnotationMetadataReadingVisitor.class";
 		byte[] bytes = Files.readAllBytes(Paths.get(path));
 		ByteCode bc = new ByteCode(bytes);
 		bc.parse();

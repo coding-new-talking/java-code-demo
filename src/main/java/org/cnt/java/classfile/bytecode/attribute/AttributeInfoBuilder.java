@@ -29,6 +29,8 @@ public class AttributeInfoBuilder {
 				return new ConstantValue(bytes, offset);
 			case Code_Attribute:
 				return new Code(bytes, offset, constantPool);
+			case StackMapTable_Attribute:
+				return new StackMapTable(bytes, offset);
 			case Exceptions_Attribute:
 				return new Exceptions(bytes, offset);
 			case InnerClasses_Attribute:
@@ -75,6 +77,7 @@ public class AttributeInfoBuilder {
 	
 	public static final String ConstantValue_Attribute = "ConstantValue";
 	public static final String Code_Attribute = "Code";
+	public static final String StackMapTable_Attribute = "StackMapTable";
 	public static final String Exceptions_Attribute = "Exceptions";
 	public static final String InnerClasses_Attribute = "InnerClasses";
 	public static final String EnclosingMethod_Attribute = "EnclosingMethod";
