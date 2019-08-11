@@ -1,7 +1,7 @@
 package org.cnt.java.classfile.bytecode.attribute;
 
-import org.cnt.java.classfile.bytecode.attribute.annotation.StackMapFrame;
 import org.cnt.java.classfile.bytecode.attribute.util.Num2;
+import org.cnt.java.classfile.bytecode.attribute.util.StackMapFrame;
 
 /**
  * @author lixinjie
